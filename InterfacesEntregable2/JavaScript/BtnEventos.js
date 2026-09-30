@@ -101,7 +101,7 @@ btn_banner_jugar.addEventListener('click', () => {
   clearInterval(salto);
   btn_banner_jugar.classList.add('saliendo');
   setTimeout(() => {
-    window.location.href = 'Juego.html';
+    window.location.href = '../InterfacesEntregable2/juego.html';
   }, 350);
 });
 
