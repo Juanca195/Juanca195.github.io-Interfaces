@@ -1,0 +1,952 @@
+
+:root {
+--secondary-dark-2: #26004D;
+--secondary-dark-1: #4D0099;
+--secondary: #9f4cdb;
+--secondary-light-1: #B366FF;
+--secondary-light-2: #E6CCFF;
+--primary-dark-2: #002040;
+--primary-dark-1: #004080;
+--primary: #0000FF;
+--primary-light-1: #4DA6FF;
+--primary-light-2: #CCE6FF;
+--accent: #FFD700;
+--muted: #c1c1c1;
+--background-page: #111114;
+--white: #FFFFFF;
+--black: #000000;
+--font-primary: 'Exo 2', 'sans serif';
+--font-secondary: 'Roboto','sans serif';
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background-page);
+  color: var(--white);
+  font-family: var(--font-primary);
+}
+
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+button { 
+  font: inherit; 
+  color: inherit; 
+  background: none; 
+  border: none;
+  cursor: pointer; 
+}
+
+
+
+/*      Inicio Nav  */
+header{
+  width: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  width: 100%;
+  margin: 8px 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.content_nav_left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Boton */
+.btn-burger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  z-index: 1000;
+}
+
+.btn-burger:hover {
+  opacity: 0.7;
+}
+/*  Con estas clases gira solo la flecha  */
+.icon-arrow {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.btn-burger.active .icon-arrow {
+  transform: rotate(180deg);
+}
+/* ---------- Overlay (se inyecta por JS) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 900;
+}
+
+.overlay.active {
+  visibility: visible;
+}
+
+/* ---------- Menú desplegable ---------- */
+.menu-hamburguesa {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; 
+  width: 220px;
+  padding: 90px 20px 20px 20px;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 950;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.menu-hamburguesa.active {
+  transform: translateX(0);
+}
+  
+/* ---------- Ítems del menú ---------- */
+/* Ambos menús usan violeta en reposo y blanco sobre violeta al hover/activo. */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.menu-hamburguesa .menu-item:hover,
+.menu-hamburguesa .menu-item.active,
+.menu-perfil .menu-item:hover,
+.menu-perfil .menu-item.active {
+    background: #9F4CDB;
+    transform: translateX(2px);
+}
+
+.menu-hamburguesa .label,
+.menu-hamburguesa .icon,
+.menu-perfil .label,
+.menu-perfil .icon {
+  color: #9F4CDB;
+}
+
+.menu-hamburguesa .menu-item:hover .label,
+.menu-hamburguesa .menu-item:hover .icon,
+.menu-hamburguesa .menu-item.active .label,
+.menu-hamburguesa .menu-item.active .icon,
+.menu-perfil .menu-item:hover .label,
+.menu-perfil .menu-item:hover .icon,
+.menu-perfil .menu-item.active .label,
+.menu-perfil .menu-item.active .icon {
+  color: #fff;
+}
+
+ .menu-hamburguesa .menu-item.active .label {
+  font-weight: 700;
+}
+
+ .icon {
+  width: 20px;
+  height: 20px;
+  color: var(--Secundario);
+  stroke: currentColor;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+ .icon-inicio { height: 23px; }
+.icon-estrategia { height: 18px; }
+
+.label {
+  color: var(--Secundario);
+  font-size: 20px;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+   /* El menú oculto por defecto */
+.menu-perfil {
+  display: none; 
+  position: absolute;
+  top: 50px; 
+  right: 0;
+  height: auto;
+  background-color: #000; 
+  min-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 100; /* Asegura que quede por encima de otros elementos */
+  padding: 8px 0;
+}
+
+ /* ESTA ES LA CLAVE: la clase que JavaScript agregará para mostrar el menú */
+.menu-perfil.activo {
+  display: flex;
+  flex-direction: column;
+}
+
+ .content-nav-search-center{
+  display: flex;
+  max-width: 500px;
+  flex: 1;
+  gap: 12px;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  background-color: color-mix(in srgb, var(--secondary) 50%, transparent);    
+}
+
+
+.content-nav-search-center input{
+ width: 100%;
+ background: transparent;
+ border: none;
+ outline: none;
+ color: var(--white);
+ font-size: 16px;  
+}
+
+
+.content-nav-search-center input::placeholder{
+ color: var(--white);
+ opacity: 1;
+}
+
+.content-nav-rigth {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ align-self: stretch;
+ gap: 10px;
+ text-decoration: none;
+ color: inherit;
+}
+
+@property --p {
+ syntax: "<percentage>";
+ initial-value: 0%;
+ inherits: false;
+}
+
+.btn-subscription {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: 10px;
+  border: none;
+  border-radius: 10px;
+  background:color-mix(var(--secondary) 50%, transparent);;
+  padding: 0 14px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background 1s ease-in-out;
+}
+
+.btn-subscription::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;                /* grosor del trazo */
+  border-radius: inherit;
+  background: conic-gradient(var(--accent) var(--p), transparent 0);
+  mask: linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+  mask-composite: exclude;     /* deja solo el anillo */
+  transition: --p 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.btn-subscription:hover::before,
+.btn-subscription:focus-visible::before {
+    --p: 100%;                   /* borde completo */
+    
+}
+
+.btn-subscription:hover::before,
+.btn-subscription:focus-visible::before {
+    --angle: 360deg;             /* el tramo da una vuelta completa */
+    opacity: 1;
+}
+
+.btn-subscription:hover,
+.btn-subscription:focus-visible {
+    background: var(--secondary-dark-2);
+}
+
+/* Corona (opcional): vibra al hacer hover */
+.premium-icon {
+    transform-origin: 50% 100%;
+}
+
+.btn-subscription:hover .premium-icon {
+    animation: crown-shake 0.6s ease-in-out;
+}
+
+@keyframes crown-shake {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-12deg); }
+    40% { transform: rotate(10deg); }
+    60% { transform: rotate(-6deg); }
+    80% { transform: rotate(30deg); }
+}
+
+  .content-perfil{
+    width: 40px;
+    height: auto;
+    box-sizing: border-box;
+    background: rgba(159, 76, 219, 0.50);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+  }
+  
+/*    Fin del nav   */
+
+
+
+/* banner */
+.banner-container {
+    position: relative;
+    width: 100%;
+}
+
+.banner-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;   /* cada slide "se pega" al borde */
+    scrollbar-width: none;           /* oculta la barra de scroll */
+}
+
+.banner-slide {
+    position: relative;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 100%;                 /* cada slide ocupa todo el ancho */
+    scroll-snap-align: start;
+    /* height: 500px; aca modo desktop, en media se usa el clamp, lo dejo por el momento */
+    height: clamp(300px, 40vw, 480px);
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;               /* recorta sin deformar */
+    display: block;
+}
+
+/* Degradado para que el texto se lea sobre cualquier imagen */
+.banner-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9), transparent 65%);
+    pointer-events: none;
+}
+
+.banner-content {
+    position: absolute;
+    inset: 0;
+    z-index: 1;                      /* por encima del degradado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0px 100px;
+    color: #fff;
+    
+}
+
+.banner-content h2 {
+    margin: 0;
+    font-size: 70px;
+    text-transform: uppercase;
+    
+}
+
+.banner-content p {
+    width: 50%;
+    font-weight: 500;
+    
+}
+.banner-viewport {
+    position: relative;   /* referencia de las flechas */
+}
+
+
+/* Flechas */
+.banner-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--secondary) 70%, transparent);
+    color: var(--white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.banner-arrow:hover {
+    background: var(--secondary);
+}
+
+.banner-arrow.prev { left: 16px; }
+.banner-arrow.next { right: 16px; }
+
+/* banner */
+
+
+/*  Animacion de btnJUgar */
+/* Se podria jugar con el tema de los colores*/
+.btn-jugar {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 30px;
+  border-radius: 30px;
+  background: var(--secondary);
+  color:var(--primary-dark-2);
+  font-size: 18px;
+  font-weight: 500px;
+  cursor: pointer;
+  box-shadow: 0 6px 0;
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s, opacity .35s; 
+}
+
+.btn-jugar .tri {
+  width: 0; height: 0;
+  border-left: 16px solid currentColor;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  transition: transform .25s;
+}
+
+.btn-jugar:hover  { 
+  transform: translateY(-4px) scale(1.05); 
+  box-shadow: 0 10px 0 var(--secondary-dark-1); 
+}
+.btn-jugar:hover .tri { 
+  transform: translateX(5px); 
+}
+.btn-jugar:active {
+   transform: translateY(4px) scale(.97);   
+   box-shadow: 0 2px 0 var(--secondary-dark-1); 
+  }
+
+.btn-jugar.salto    { 
+  transform: translateY(-12px); 
+}
+.btn-jugar.saliendo { 
+  transform: scale(1.15); 
+  opacity: 0; 
+  pointer-events: none;
+}
+
+
+.catalog {
+  width: min(1841px, calc(100% - 40px));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 28px 20px 0;
+}
+
+.game-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Oculta el scrollbar visualmente*/ 
+  scrollbar-width:none; 
+}
+
+.game-section h2 {
+
+  margin: 10px;
+  color: var(--white);
+  font-size: 30px;
+  font-weight: 800;
+}
+/* Tatjeta de juegos */
+/*  Cardd de juegooo */
+.game-row {
+  display: grid;
+  grid-template-columns: repeat(20, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  
+}
+.game-card{
+  position: relative;
+  cursor: pointer; /* cambia el cursor a una mano*/
+
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+/*  Animaciones para que se vean los nombres de los juegos  */
+.game-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* El cuadro de color con el nombre del juego (oculto por defecto) */
+.game-title {
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background: rgba(13, 30, 74, 0.623); /* Fondo color semitransparente */
+  color: white;
+  text-align:justify;
+  font-weight: bold;
+  font-family: sans-serif;
+  border-radius: 20px;
+  
+  /* ESTOS DOS SON PARA LA ANIMACIÓN */
+  transform: translateY(100%); /* Empuja el texto hacia abajo, fuera del contenedor */
+  transition: transform 0.3s ease; /* Animación suave */
+}
+/*Al aplicar el escalado al contenedor completo, se agrandan la imagen y el borde al mismo tiempo,
+ manteniendo la proporción y pareciendo que el objeto físico "se acerca".*/
+.game-card:hover{
+  transform: scale(1.08);
+  box-shadow: 0 15px 30px rgba(0, 51, 204, 0.7);
+/*Aseguramos que la tarjeta agrandada siempres este arriba*/
+  z-index: 10px;
+}
+
+.game-card:hover .game-title {
+  transform: translateY(0); /* Lo devuelve a su posición original visible */
+}
+
+
+.game-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+
+.game-section--promo {
+  background: linear-gradient(90deg, rgba(77, 0, 153, 0.5) 0%, rgba(153, 102, 204, 0.5) 0%, rgba(17, 17, 20, 0.5) 100%);
+  border-radius: 0;
+  padding: 12px 0 20px;
+}
+
+footer{
+     /* El footer usa todo el ancho y conserva poco espacio vertical. */
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     width: 100%;
+     padding: 32px 16px 32px;
+     gap: 30px;
+     background: var(--black);
+     font-family: var(--font-secondary);
+}
+
+.footer-grid {
+     width: 100%;
+     display: grid;
+     grid-template-columns: minmax(250px, 300px) repeat(5, max-content);
+     gap: 70px;
+     justify-content: center;
+     align-items: start;
+     font-family: var(--font-secondary);
+}
+
+.footer-content-logo-description {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: start;
+     gap: 20px;
+     margin: 0px;
+}
+
+.footer-logo {
+     /* Mantiene el logo proporcionado dentro de la fila inferior. */
+     width: 100%;;
+     max-width: 250px;
+}
+
+.footer-content-logo-description span {
+     width: 100%;
+     
+}
+
+section ul{
+     margin: 8px 0 0 0;
+     padding: 0;
+     list-style: none;
+     display: flex;
+     flex-direction: column;
+     gap: 8px;     
+}
+
+.social-area {
+     text-align: center;
+     gap: 18px;
+}
+
+.social-icons {
+     display: flex;
+     justify-content: center;
+     gap: 30px;
+     margin: 12px 0 25px;
+}
+
+
+/* Desarrollo Mobile */
+@media (max-width: 640px) {
+  /* Organiza el nav real en dos filas para evitar que sus elementos se desborden en mobile. */
+  .nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand actions"
+      "search search";
+    align-items: center;
+    gap: 8px 10px;
+    width: 100%;
+    margin: 0;
+    padding: 8px 12px;
+  }
+
+  /* Mantiene el botón hamburguesa y el logo compactos en la primera fila. */
+  .content_nav_left {
+    grid-area: brand;
+    min-width: 0;
+    align-self: center;
+    gap: 6px;
+  }
+
+  .btn-burger svg {
+    width: 30px;
+    height: auto;
+  }
+
+  .content_nav_left > a img {
+    display: block;
+    width: 90px;
+    height: auto;
+  }
+
+  /* Hace que el buscador use una fila completa y pueda encogerse sin desbordar. */
+  .content-nav-search-center {
+    grid-area: search;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px;
+  }
+
+  .content-nav-search-center input {
+    min-width: 0;
+    font-size: 14px;
+  }
+
+  /* Agrupa premium y perfil arriba a la derecha, con tamaños táctiles compactos. */
+  .content-nav-rigth {
+    position: relative;
+    grid-area: actions;
+    justify-self: end;
+    align-self: center;
+    gap: 6px;
+    margin: 0;
+  }
+
+  .btn-subscription {
+    align-self: center;
+    gap: 4px;
+    padding: 7px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .content-perfil {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  /* El panel hamburguesa ocupa la pantalla disponible y permite scroll en móviles bajos. */
+  .menu-hamburguesa {
+    width: min(280px, 85vw);
+    height: 100vh;
+    height: 100dvh;
+    padding: 76px 14px 20px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  /* Amplía las opciones de ambos menús para que sean cómodas al tocar. */
+  .menu-hamburguesa .menu-item,
+  .menu-perfil .menu-item {
+    min-height: 44px;
+    padding: 12px;
+  }
+
+  /* Ancla el menú de perfil al grupo de acciones y limita su tamaño a la pantalla. */
+  .menu-perfil {
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(260px, calc(100vw - 24px));
+    max-height: calc(100vh - 100px);
+    max-height: calc(100dvh - 100px);
+    overflow-y: auto;
+    z-index: 1100;
+  }
+
+  /* El banner mantiene la composicion de escritorio, con columnas proporcionales. */
+  .hero-strip {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+  }
+
+  .hero-side {
+    width: auto;
+    min-width: 0;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .hero-side h1 {
+    font-size: 18px;
+  }
+
+  .mini-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 6px;
+  }
+
+  .mini-cards img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hero-price {
+    font-size: 22px;
+  }
+
+  .cta-button {
+    /*hace que un elemento individual dentro de un contenedor
+    se estire para ocupar todo el espacio disponible*/
+    align-self: stretch;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+
+
+  .catalog {
+    width: 100%;
+    gap: 28px;
+    padding: 24px 12px 0;
+  }
+
+  .game-section h2 {
+    font-size: 18px;
+  }
+
+  /* Las cards siguen en una fila desplazable; cada imagen se reduce en alto. */
+  .game-row {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(160px, 78vw);
+    gap: 12px;
+    padding: 12px 2px;
+  }
+
+  .game-card img {
+    height: 130px;
+    border-radius: 16px;
+  }
+
+  .game-title {
+    padding: 10px;
+    font-size: 14px;
+    transform: none;
+  }
+
+  /* Los efectos hover solo se activan con mouse para evitar estados pegados al tocar. */
+    .game-card:hover {
+      z-index: 2;
+      transform: scale(1.04);
+    }
+
+    .game-card:hover img {
+      filter: brightness(0.8);
+    }
+
+    .mini-cards img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .cta-button:hover,
+    .btn-subscription:hover,
+    .content-perfil:hover {
+      filter: brightness(1.15);
+      transform: translateY(-2px);
+    }
+
+    .btn-burger:hover {
+      filter: brightness(1.25);
+      transform: scale(1.08);
+    }
+
+    /* Sincroniza el efecto de pulsación con los controles reales del nav mobile. */
+    .game-card:active,
+  .mini-cards img:active,
+  .cta-button:active,
+    .btn-subscription:active,
+  .content-perfil:active,
+  .btn-burger:active {
+    transform: scale(0.97);
+  }
+
+  /* El contorno hace visibles los controles al navegar con teclado. */
+  .cta-button:focus-visible,
+  .btn-subscription:focus-visible,
+  .content-perfil:focus-visible,
+  .btn-burger:focus-visible,
+  .game-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  
+  /* El footer usa sus clases reales y reorganiza sus seis columnas en movil. */
+   footer {
+    padding: 24px 12px;
+    gap: 24px;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+
+  .footer-content-logo-description {
+    grid-column: 1 / -1;
+    align-items: flex-start;
+    text-align: left;
+    gap: 12px;
+  }
+
+  .footer-content-logo-description span {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .footer-grid > section {
+    min-width: 0;
+  }
+
+  .footer-bottom {
+    width: 100%;
+    justify-content: center;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .footer-logo {
+    width: min(200px, 100%);
+  }
+
+  .social-area {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .social-area h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .social-icons {
+    gap: 20px;
+    margin: 8px 0;
+  }
+
+  .social-area small {
+    color: #dedede;
+    font-size: 12px;
+    text-align: center;
+  } 
+
+
+
+
+}
+
+ 

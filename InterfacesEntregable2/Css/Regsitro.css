@@ -1,0 +1,516 @@
+:root {
+     --secondary-dark-2: #26004D;
+     --secondary-dark-1: #4D0099;
+     --secondary: #9f4cdb;
+     --secondary-light-1: #B366FF;
+     --secondary-light-2: #E6CCFF;
+     --primary-dark-2: #002040;
+     --primary-dark-1: #004080;
+     --primary: #0000FF;
+     --primary-light-1: #4DA6FF;
+     --primary-light-2: #CCE6FF;
+     --accent: #FFD700;
+     --muted: #c1c1c1;
+     --background-page: #111114;
+     --white: #FFFFFF;
+     --black: #000000;
+     --font-primary: 'Exo 2', 'sans serif';
+     --font-secondary: 'Roboto','sans serif';
+}
+
+* {
+     box-sizing: border-box;
+}
+
+body {
+     width: 100%;
+     min-height: 100vh;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin: 0;
+     background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)),
+          url('../Img/fondo_forms.jpeg') center/cover no-repeat;
+     color: var(--white);
+     font-family:var(--font-primary);
+}
+
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+
+
+/*---------- Inicio de Header ----------*/
+header {
+     width: 100%;
+     background: var(--black);
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     justify-content: center;
+}
+
+
+
+nav {
+     width: 100%;
+     margin: 8px 12px 8px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+}
+
+
+.content_nav_left {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+}
+
+
+.btn-burger {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     background: none;
+     border: none;
+     cursor: pointer;
+     padding: 0.25rem;
+
+}
+
+
+.btn-burger-icon {
+     width: 24px;
+     height: 24px;
+     fill: #9F4CDB;
+}
+
+
+.content_nav_right {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     align-self: stretch;
+     border-radius: 10px;
+     background: rgba(159, 76, 219, 0.50);
+     padding: 0px 14px 0px;
+     text-decoration: none;
+     color: inherit
+}
+
+
+
+
+/*---------- Fin Header ----------*/
+
+/*     Registro    */
+.register-card {
+     width: 600px;
+     margin: 50px;
+     padding: 48px 48px 40px;
+     background: #26004D;
+     border-radius: 50px;
+     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+}
+
+
+h1 {
+     margin: 0 0 25px;
+     text-align: center;
+     color: #fff;
+     font-size: 2rem;
+     font-weight: 600;
+     line-height: 1.2;
+     text-shadow: none;
+}
+
+.register-form,
+.field {
+     display: flex;
+     flex-direction: column;
+}
+
+.register-form {
+     gap: 15px;
+}
+
+.field {
+     gap: 13px;
+     font-family: inherit;
+     font-size: 20px;
+     font-weight: 500;
+}
+
+input {
+     width: 100%;
+     height: 48px;
+     padding: 0 17px;
+     border: 0;
+     border-radius: 20px;
+     font: 400 20px 'Exo 2';
+     color: rgba(0, 0, 0, .7);
+     background: #fff;
+}
+
+input:focus {
+     outline: 2px solid var(--accent);
+}
+
+small {
+     color: var(--muted);
+     font-size: 14px;
+     font-weight: 400;
+}
+.content-small small{
+     display: flex;             
+     flex-direction: column;    
+     gap: 12px;
+}
+
+.field-with-help,
+.password-field {
+     gap: 8px;
+}
+
+.password-input {
+     height: 50px;
+     padding: 0 17px;
+     background: #fff;
+     border-radius: 20px;
+     display: flex;
+     align-items: center;
+}
+
+.password-toggle {
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  width: 22px;
+  height: 25px;
+}
+
+.password-input input {
+     padding: 0;
+}
+
+.eye-icon {
+     width: 20px;
+     height: 12px;
+     border: 2px solid #000;
+     border-radius: 80% 0;
+     transform: rotate(45deg);
+}
+/*  Animacion del boton registro  */
+     .btn-register {
+     width: auto;
+     height: 52px;
+     display: flex;
+     padding: 12px 28px; 
+     border: none; 
+     border-radius: 30px;
+     align-self: center;
+     align-items: center;
+     background: #4f46e5; 
+     color: #fff; 
+     font-size: 16px; 
+     cursor: pointer;
+     transition: transform .2s, background .4s, box-shadow .2s, opacity .3s;
+     }
+     .btn-register:hover  { 
+          box-shadow: 0 6px 16px rgba(79,70,229,.4); }
+     .btn-register:active { 
+          transform: scale(.95); }
+
+     /* Estado: cargando */
+     .btn-register.loading { 
+          pointer-events: none; 
+          opacity: .85; }
+
+     /* Estado: registrado */
+     .btn-register.done { 
+          background: #12aa04; 
+          pointer-events: none; }
+
+     /* Rebote: se agrega y quita desde JS */
+     .btn-register.pop { 
+          transform: scale(1.15); }
+
+     /* Spinner (oculto por defecto) */
+     .spinner {
+     display: none; 
+     width: 16px; 
+     height: 16px; 
+     margin-left: 8px;
+     border: 2px solid #fff; 
+     border-top-color: transparent; 
+     border-radius: 50%;
+     vertical-align: middle;
+     }
+     .btn-register.loading .spinner { 
+          display: flex;
+          flex-direction: flex-end;
+     }
+
+/*-- Fin registro ----*/
+
+/*   Re armarlo  */
+.captcha {
+     /* Centrado en el formulario */
+     margin: 20px auto;
+     /* Apariencia del recuadro blanco clásico */
+     background-color: #f9f9f9;
+     /* Color de fondo oficial */
+     border: 1px solid #d3d3d3;
+     border-radius: 3px;
+     box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.08);
+     /* Dimensiones oficiales de Google reCAPTCHA */
+     width: 304px;
+     height: 78px;
+     padding: 0 10px 0 12px;
+     box-sizing: border-box;
+
+     /* Diseño interno para separar el check (izq) y el logo (der) */
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+
+     /* Tipografía similar a la de Google */
+     font-family: Roboto, Helvetica, Arial, sans-serif;
+
+}
+
+.captcha-check {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     font-size: 14px;
+     color: #222;
+}
+
+.checkbox {
+     width: 28px;
+     height: 28px;
+     background-color: #fff;
+     border: 2px solid #c1c1c1;
+     border-radius: 2px;
+}
+
+.checkbox:hover {
+     border-color: #b2b2b2;
+     /* Oscurece un poco al pasar el mouse */
+}
+
+.captcha-logo {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-end;
+     gap: 2px;
+     font-size: 10px;
+}
+
+.captcha-logo small {
+     color: #000;
+     font-size: 8px;
+}
+
+.captcha-mark {
+     width: 22px;
+     height: 16px;
+     background: linear-gradient(135deg, #b5b6b5 45%, #4d8df4 45% 70%, #1b3cac 70%);
+}
+
+/*-- Botones redes sociales ---*/
+.register-button,
+.social-button {
+     border: 0;
+     border-radius: 50px;
+     padding: 14px 30px;
+     font: 700 20px 'Exo 2';
+     text-decoration: none;
+     text-align: center;
+     cursor: pointer;
+}
+
+.register-button {
+     width: 178px;
+     height: 52px;
+     font-size: 20px;
+     border-radius: 30px;
+     align-self: center;
+     color: #fff;
+     background: var(--primary);
+}
+
+/* Posible animacion    */
+.register-button:hover {
+     background-color: var(--secondary);
+     transform: scale(1.05);
+     box-shadow: 0 8px 20px rgba(6, 16, 37, 0.45);
+}
+
+.login-link {
+     margin: 0;
+     text-align: center;
+     font-size: 15px;
+}
+
+.login-link a {
+     color: #fff;
+     font-weight: 500;
+}
+
+.separator {
+     height: 1px;
+     margin-top: 10px;
+     background: #fff;
+}
+
+.social-buttons {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 33px;
+     margin-top: 30px;
+}
+
+.social-button {
+     width: 100%;
+     padding: 10px 16px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 10px;
+     font-weight: 400;
+     transition: box-shadow 0.3s ease;
+}
+.social-button:hover{
+     transform: translateY(-2px); /* Mueve el botón 2 píxeles hacia arriba */
+     box-shadow: 0 0 15px 3px rgba(59, 89, 152, 0.7);
+}
+
+.facebook {
+     color: #fff;
+     background: #1877f2;
+}
+
+.google {
+     color: #000;
+     background: #fff;
+}
+
+.social-icon,
+.google-icon {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     font-weight: 700;
+     font-size: 25px;
+}
+
+/*Tamaños de las redes*/
+.social-icon img,
+.google-icon img,
+.social-icons img {
+     display: block;
+     width: 30px;
+     height: 30px;
+     object-fit: contain;
+}
+
+.google-icon {
+     color: #4285f4;
+}
+
+/*      Inicio del footer*/
+
+
+footer {
+     /* El footer usa todo el ancho y conserva poco espacio vertical. */
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     width: 100%;
+     padding: 32px 16px 32px;
+     gap: 30px;
+     background: #000;
+     font-family: var(--font-secondary);
+
+}
+
+.footer-grid {
+     width: 100%;
+     display: grid;
+     grid-template-columns: minmax(250px, 300px) repeat(5, max-content);
+     gap: 70px;
+     justify-content: center;
+     align-items: start;
+     font-family: var(--font-secondary);
+}
+
+.footer-content-logo-description {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: start;
+     gap: 20px;
+     margin: 0px;
+    
+     
+}
+
+.footer-logo {
+     /* Mantiene el logo proporcionado dentro de la fila inferior. */
+     width: 100%;;
+     max-width: 250px;
+    
+
+}
+
+.footer-content-logo-description span {
+     width: 100%;
+     
+}
+
+
+section {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;                /* separación controlada por vos, no por el navegador */
+     font: var(--font-family-secondary) normal 14px;
+    
+}
+
+section h3 {
+     font-weight: normal; 
+     margin: 0px;
+}
+
+section ul{
+     margin: 0;
+     padding: 0;
+     list-style: none;
+     display: flex;
+     flex-direction: column;
+     gap: 8px;     
+}
+
+.social-area {
+     text-align: center;
+     gap: 18px;
+}
+
+.social-icons {
+     display: flex;
+     justify-content: center;
+     gap: 30px;
+     margin: 12px 0 25px;
+}
+
+/* --------------Fin footer------------ */
+
