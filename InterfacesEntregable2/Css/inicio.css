@@ -343,32 +343,31 @@ header{
 
 /* banner */
 .banner-container {
-    position: relative;
-    width: 100%;
+   --i: 0;                     /* índice del slide actual, lo cambia el JS */
+  position: relative;
+  width: 100%;
+  overflow: hidden;   
 }
 
 .banner-track {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;   /* cada slide "se pega" al borde */
-    scrollbar-width: none;           /* oculta la barra de scroll */
-}
+     display: flex;
+    translate: calc(var(--i) * -100%) 0;      /* desplaza el carril un slide por índice */
+    transition: translate 0.7s cubic-bezier(0.65, 0, 0.35, 1);          /* oculta la barra de scroll */
+  }
 
 .banner-slide {
     position: relative;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 100%;                 /* cada slide ocupa todo el ancho */
-    scroll-snap-align: start;
-    /* height: 500px; aca modo desktop, en media se usa el clamp, lo dejo por el momento */
+    flex: 0 0 100%;
     height: clamp(300px, 40vw, 480px);
+    overflow: hidden;    
 }
 
 .banner-img {
-    width: 100%;
+   width: 100%;
     height: 100%;
     object-fit: cover;               /* recorta sin deformar */
     display: block;
+    transition: scale 0.8s ease;
 }
 
 /* Degradado para que el texto se lea sobre cualquier imagen */

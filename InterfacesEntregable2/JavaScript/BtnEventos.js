@@ -107,22 +107,20 @@ btn_banner_jugar.addEventListener('click', () => {
 
 //flechas
 
-const track = document.querySelector('.banner-track');
+const container = document.querySelector('.banner-container');
+const slides = document.querySelectorAll('.banner-slide');
 const prev = document.querySelector('.banner-arrow.prev');
 const next = document.querySelector('.banner-arrow.next');
 
-next.addEventListener('click', () => {
-    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
-    track.scrollTo({
-        left: atEnd ? 0 : track.scrollLeft + track.clientWidth,
-        behavior: 'smooth'
-    });
-});
+let index = 0;
 
-prev.addEventListener('click', () => {
-    const atStart = track.scrollLeft <= 0;
-    track.scrollTo({
-        left: atStart ? track.scrollWidth : track.scrollLeft - track.clientWidth,
-        behavior: 'smooth'
-    });
-});
+function goTo(i) {
+    index = (i + slides.length) % slides.length;    // da la vuelta al llegar al final
+    container.style.setProperty('--i', index);
+
+}
+
+next.addEventListener('click', () => goTo(index + 1));
+prev.addEventListener('click', () => goTo(index - 1));
+
+goTo(0);

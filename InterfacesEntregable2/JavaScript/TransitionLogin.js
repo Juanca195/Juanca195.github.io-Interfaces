@@ -81,7 +81,7 @@ form.addEventListener("submit", async (e) => {
   });
 
   setTimeout(() => {
-    window.location.href = 'Inicio.html';
+    window.location.href = 'inicio.html';
   },50);
 
   await new Promise(r => setTimeout(r, 500));
