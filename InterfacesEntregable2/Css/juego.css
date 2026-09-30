@@ -121,38 +121,120 @@
     opacity: 1;
   }
 
-
+/* Contenedor derecho del nav */
   .content-nav-rigth {
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-self: stretch;
     gap: 10px;
     text-decoration: none;
     color: inherit;
   }
 
-  .btn-subscription{
+  @property --p {
+    syntax: "<percentage>";
+    initial-value: 0%;
+    inherits: false;
+  }
+
+  .btn-subscription {
+    position: relative;
     display: flex;
     align-items: center;
     align-self: stretch;
     gap: 10px;
+    border: none;
     border-radius: 10px;
-    background: rgba(159, 76, 219, 0.50);
-    padding: 0px 14px 0px;
+    background: color-mix(var(--secondary) 50%, transparent);
+    ;
+    padding: 0 14px;
     text-decoration: none;
-    color: inherit
+    color: inherit;
+    cursor: pointer;
+    transition: background 1s ease-in-out;
   }
 
-  .content-perfil{
+  .btn-subscription::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    /* grosor del trazo */
+    border-radius: inherit;
+    background: conic-gradient(var(--accent) var(--p), transparent 0);
+    mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    /* deja solo el anillo */
+    transition: --p 0.8s ease-in-out;
+    pointer-events: none;
+  }
+
+  .btn-subscription:hover::before,
+  .btn-subscription:focus-visible::before {
+    --p: 100%;
+    /* borde completo */
+
+  }
+
+  .btn-subscription:hover::before,
+  .btn-subscription:focus-visible::before {
+    --angle: 360deg;
+    /* el tramo da una vuelta completa */
+    opacity: 1;
+  }
+
+  .btn-subscription:hover,
+  .btn-subscription:focus-visible {
+    background: var(--secondary-dark-2);
+  }
+
+  /* Corona (opcional): vibra al hacer hover */
+  .premium-icon {
+    transform-origin: 50% 100%;
+  }
+
+  .btn-subscription:hover .premium-icon {
+    animation: crown-shake 0.6s ease-in-out;
+  }
+
+  @keyframes crown-shake {
+
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+
+    20% {
+      transform: rotate(-12deg);
+    }
+
+    40% {
+      transform: rotate(10deg);
+    }
+
+    60% {
+      transform: rotate(-6deg);
+    }
+
+    80% {
+      transform: rotate(30deg);
+    }
+  }
+
+  .content-perfil {
     width: 40px;
-    height: 40px;
+    height: auto;
     box-sizing: border-box;
     background: rgba(159, 76, 219, 0.50);
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: stretch;
   }
+
 
   /*Fin del nav*/
 
