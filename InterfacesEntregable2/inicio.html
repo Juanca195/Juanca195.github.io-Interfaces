@@ -245,36 +245,69 @@
 
     <!-- Catálogo de juegos por categoría -->
     <main class="catalog" aria-label="Catálogo principal">
+     
       <section id="estrategia" class="game-section" data-category="strategy" aria-labelledby="estrategia-titulo">
-        <h2>Estrategia</h2>
-        <div class="game-row">
+        <h2 id="estrategia-titulo">Estrategia</h2>
+
+        <div class="game-carousel">
+          <button type="button" class="row-arrow prev" aria-label="Juegos anteriores">&#10094;</button>
+
+          <div class="game-viewport">
+            <div class="game-row">
+              <!-- las tarjetas las crea tu JS de la API -->
+            </div>
+          </div>
+
+          <button type="button" class="row-arrow next" aria-label="Juegos siguientes">&#10095;</button>
         </div>
       </section>
 
-      <section id="aventura" class="game-section" data-category="Adventure" aria-labelledby="deportes-titulo">
-        <h2>Aventura</h2>
-        <div class="game-row"></div>
+
+
+      <section id="aventura" class="game-section" data-category="Adventure" aria-labelledby="aventura-titulo">
+        <h2 id="aventura-titulo">Aventura</h2>
+        <div class="game-carousel">
+          <button type="button" class="row-arrow prev" aria-label="Juegos anteriores">&#10094;</button>
+          <div class="game-viewport">
+            <div class="game-row"></div>
+          </div>
+          <button type="button" class="row-arrow next" aria-label="Juegos siguientes">&#10095;</button>
+        </div>
       </section>
 
       <section class="game-section game-section--promo" data-category="Shooter" aria-labelledby="suscripcion-titulo">
-        <h2>Juegos con suscripción</h2>
-
-        <div class="game-row">
-
+        <h2 id="suscripcion-titulo">Juegos premium</h2>
+        <div class="game-carousel">
+          <button type="button" class="row-arrow prev" aria-label="Juegos anteriores">&#10094;</button>
+          <div class="game-viewport">
+            <div class="game-row"></div>
+          </div>
+          <button type="button" class="row-arrow next" aria-label="Juegos siguientes">&#10095;</button>
         </div>
       </section>
 
-      <section id="accion" class="game-section" data-category="Action" aria-labelledby="Accion-titulo">
-        <h2>Acción</h2>
-        <div class="game-row">
+      <section id="accion" class="game-section" data-category="Action" aria-labelledby="accion-titulo">
+        <h2 id="accion-titulo">Acción</h2>
+        <div class="game-carousel">
+          <button type="button" class="row-arrow prev" aria-label="Juegos anteriores">&#10094;</button>
+          <div class="game-viewport">
+            <div class="game-row"></div>
+          </div>
+          <button type="button" class="row-arrow next" aria-label="Juegos siguientes">&#10095;</button>
         </div>
       </section>
-      <section class="game-section" data-category="sports">
-        <h2>Deportes</h2>
-        <div class="game-row"></div>
+
+      <section id="deportes" class="game-section" data-category="sports" aria-labelledby="deportes-titulo">
+        <h2 id="deportes-titulo">Deportes</h2>
+        <div class="game-carousel">
+          <button type="button" class="row-arrow prev" aria-label="Juegos anteriores">&#10094;</button>
+          <div class="game-viewport">
+            <div class="game-row"></div>
+          </div>
+          <button type="button" class="row-arrow next" aria-label="Juegos siguientes">&#10095;</button>
+        </div>
       </section>
 
-      </section>
     </main>
 
     <footer>
@@ -387,6 +420,7 @@
   </div>
   <script src="../InterfacesEntregable2/JavaScript/BtnEventos.js"></script>
   <script src="../InterfacesEntregable2/JavaScript/ConsumirApi.js"></script>
+  <script src="../InterfacesEntregable2/JavaScript/CarruselMain.js"></script>
 </body>
 
 </html>
