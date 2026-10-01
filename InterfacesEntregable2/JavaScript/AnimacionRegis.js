@@ -50,7 +50,7 @@ form.addEventListener("submit", async (e) => {
   // y recién después envía el formulario (esto recarga o cambia de página).
   await new Promise(r => setTimeout(r, 1000));
   setTimeout(() => {
-    window.location.href = 'Login.html';
+    window.location.href = 'login.html';
   },50);
   await new Promise(r => setTimeout(r, 500));
   form.submit();
