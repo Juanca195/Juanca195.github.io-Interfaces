@@ -633,6 +633,59 @@ header{
   100% { scale: 1; }
 }
 
+/* Catalogo premium */
+.game-section--promo {
+  padding: 20px 0 28px;
+  border: 2px solid transparent;
+  border-radius: 28px;
+  /* capa de arriba: el fondo; capa de abajo: el degradado que se ve como borde */
+  background:
+    linear-gradient(135deg, #2c1250 0%, #1a1028 55%, #111114 100%) padding-box,
+    linear-gradient(135deg, #FFCD29 0%, #9F4CDB 45%, rgba(159, 76, 219, 0.1) 100%) border-box;
+  box-shadow: var(--secondary) 0px 0px 20px 0px;
+}
+
+
+.game-section--promo h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-inline: 20px;
+}
+
+ 
+.promo-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #FFCD29;
+  color: #111114;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;   /* en el HTML se escribe "Premium" y se muestra en mayúsculas */
+}
+
+/* Las tarjetas se iluminan en dorado al pasar el mouse */
+.game-section--promo .game-card:hover {
+  box-shadow: 0 10px 30px var(--accent);
+}
+
+/* Flechas doradas */
+.game-section--promo .row-arrow {
+  background: color-mix(in srgb, #FFCD29 90%, transparent);
+  color: #111114;
+}
+
+.game-section--promo .row-arrow:hover {
+  background: #FFCD29;
+}
+
+.game-section--promo .game-title {
+  background: color-mix(in srgb, var(--accent) 50%, transparent);
+  color: var(--black);
+}
+
+
 /* ===== Flechas ===== */
 .row-arrow {
   position: absolute;
