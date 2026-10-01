@@ -105,6 +105,46 @@ btn_banner_jugar.addEventListener('click', () => {
   }, 350);
 });
 
+const botonPremium = document.querySelector(".btn-subscription");
+const listaJuegos = document.getElementById("lista-juegos");
+
+// Datos de los juegos: agregá, quitá o editá objetos acá
+const juegos = [
+  { id: 1, nombre: "Juego 1", imagen: "Img/jugeoLista1.png" },
+  { id: 2, nombre: "Juego 2", imagen: "Img/juegosLista2.png" },
+  { id: 3, nombre: "Juego 3", imagen: "Img/juegoLista3.png" },
+  { id: 4, nombre: "Juego 4", imagen: "Img/jugeoLista4.png" },
+  { id: 5, nombre: "Juego 5", imagen: "Img/juegoLista.png" },
+];
+
+// Crea una tarjeta de juego
+function crearTarjeta(juego) {
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "juego";
+
+    const imagen = document.createElement("img");
+    imagen.className = "juego__imagen";
+    imagen.src = juego.imagen;
+    imagen.alt = juego.nombre;
+
+    const boton = document.createElement("div");
+    boton.className = "boton-jugar";
+    boton.innerHTML = '<div class="boton-jugar__texto">Jugar</div>';
+
+    tarjeta.append(imagen, boton);
+    return tarjeta;
+}
+
+// Click en el botón: genera la lista si no existe, o la borra si ya está
+botonPremium.addEventListener("click", (evento) => {
+    evento.preventDefault(); // evita que el href="" recargue la página
+    if (listaJuegos.children.length > 0) {
+        listaJuegos.replaceChildren();
+    } else {
+        listaJuegos.append(...juegos.map(crearTarjeta));
+    }
+});
+
 //flechas
 
 const container = document.querySelector('.banner-container');

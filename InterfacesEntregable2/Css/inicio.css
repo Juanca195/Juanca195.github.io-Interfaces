@@ -264,6 +264,7 @@ header{
 .btn-subscription {
   position: relative;
   display: flex;
+  height: 42px;
   align-items: center;
   align-self: stretch;
   gap: 10px;
@@ -275,6 +276,51 @@ header{
   color: inherit;
   cursor: pointer;
   transition: background 1s ease-in-out;
+}
+.hearder-premium{
+  position: relative; 
+}
+.lista-juegos {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: min(360px, calc(100vw - 24px));
+    padding: 10px;
+    z-index: 10;
+    background-color: #000111;
+    border-radius: 20px;
+}
+/*Oculta la barra vacia */
+.lista-juegos:empty {
+  display: none;
+}
+
+.juego {
+  display: flex;
+  width: 100%;
+  min-height: 120px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+}
+
+.juego__imagen {
+  width: 160px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.boton-jugar {
+  margin-left: auto;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background-color: var(--primary);
+  color: var(--white);
+  text-align: center;
+  white-space: nowrap;
 }
 
 .btn-subscription::before {
