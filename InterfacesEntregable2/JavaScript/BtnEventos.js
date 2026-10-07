@@ -164,3 +164,41 @@ next.addEventListener('click', () => goTo(index + 1));
 prev.addEventListener('click', () => goTo(index - 1));
 
 goTo(0);
+
+
+document.addEventListener('DOMContentLoaded', async function () {
+    // Constantes para transicion
+    const overlay = document.getElementById('loading-overlay');
+    const loadingText = document.querySelector('.loading-text');
+    const progress = document.querySelector('.progress');
+    const progressNumber = document.querySelector('.persent');
+
+    overlay.hidden = false;
+
+    let dots = '';
+    let progressWidth = 0;
+
+
+    await new Promise((resolve) => {
+
+      const textInterval = setInterval(() => {
+        dots = dots.length < 3 ? dots + '.' : '';
+        loadingText.innerHTML = 'Preparando la diversion' + dots;
+      }, 500);
+
+      const progressInterval = setInterval(() => {
+        progressWidth += 2;
+        progress.style.width = progressWidth + '%';
+        progressNumber.textContent = progressWidth + '%';
+
+        if (progressWidth >= 100) {
+          clearInterval(progressInterval);
+          clearInterval(textInterval);
+          loadingText.textContent = '¡Disfruta tu experiencia!';
+          setTimeout(() => overlay.classList.add('is-leaving'), 800);
+          resolve(); // recién acá se resuelve la promesa
+        }
+      }, 50);
+    });
+
+  })
