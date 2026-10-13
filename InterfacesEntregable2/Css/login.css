@@ -425,13 +425,13 @@ section ul {
 }
 
 @keyframes exit {
-  
-  100% { translate: -100%;}
-  75% {trasnlate: -75% }
-  50% {trasnlate: -20% }
-  25% {trasnlate: -10% }
-  0% {trasnlate: 0% }
-  
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 .loader {
