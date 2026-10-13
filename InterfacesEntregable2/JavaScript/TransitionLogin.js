@@ -52,7 +52,7 @@ form.addEventListener("submit", async (e) => {
   
   // Espera 1 segundo para que el usuario alcance a ver el botón verde
   // y recién después envía el formulario (esto recarga o cambia de página).
-  await new Promise(r => setTimeout(r, 1000));
+  await new Promise(r => setTimeout(r, 500));
   overlay.hidden = false;
 
   let dots = '';
@@ -75,14 +75,15 @@ form.addEventListener("submit", async (e) => {
         clearInterval(progressInterval);
         clearInterval(textInterval)
         loadingText.textContent = '¡Disfruta tu experiencia!';
+        overlay.style.animation =  'exit 500ms ease-out';
         resolve(); // recién acá se resuelve la promesa
       }
     }, 50);
   });
-
+  
   setTimeout(() => {
     window.location.href = 'inicio.html';
-  },50);
+  },300);
 
   await new Promise(r => setTimeout(r, 500));
 

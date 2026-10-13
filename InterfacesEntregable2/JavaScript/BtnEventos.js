@@ -83,26 +83,25 @@ document.addEventListener('DOMContentLoaded', function () {
   
 });
 
-//btn-banner-jugar
-const btn_banner_jugar = document.getElementById('btnJugar');
-let navegando = false;
+// Botones de los banners: cada juego define su propia página de destino.
+document.querySelectorAll('.banner-slide .btn-jugar[data-game-url]').forEach((button) => {
+  let navegando = false;
 
-// Saltito periódico: solo alterna una clase, el movimiento lo hace la transition
-const salto = setInterval(() => {
-  if (navegando || btn_banner_jugar.matches(':hover')) return;
-  btn_banner_jugar.classList.add('salto');
-  setTimeout(() => btn_banner_jugar.classList.remove('salto'), 250);
-}, 2500);
+  const salto = setInterval(() => {
+    if (navegando || button.matches(':hover')) return;
+    button.classList.add('salto');
+    setTimeout(() => button.classList.remove('salto'), 250);
+  }, 2500);
 
-// Al tocar: se desvanece y navega
-btn_banner_jugar.addEventListener('click', () => {
-  if (navegando) return;
-  navegando = true;
-  clearInterval(salto);
-  btn_banner_jugar.classList.add('saliendo');
-  setTimeout(() => {
-    window.location.href = '../InterfacesEntregable2/juego.html';
-  }, 350);
+  button.addEventListener('click', () => {
+    if (navegando) return;
+    navegando = true;
+    clearInterval(salto);
+    button.classList.add('saliendo');
+    setTimeout(() => {
+      window.location.href = button.dataset.gameUrl;
+    }, 350);
+  });
 });
 
 const botonPremium = document.querySelector(".btn-subscription");

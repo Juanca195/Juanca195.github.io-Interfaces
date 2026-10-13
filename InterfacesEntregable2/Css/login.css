@@ -424,7 +424,18 @@ section ul {
   z-index: 9999;
 }
 
+@keyframes exit {
+  
+  100% { translate: -100%;}
+  75% {trasnlate: -75% }
+  50% {trasnlate: -20% }
+  25% {trasnlate: -10% }
+  0% {trasnlate: 0% }
+  
+}
+
 .loader {
+ 
   width: 100%;
   max-width: 50%;
   display: flex;

@@ -329,7 +329,7 @@ header{
   inset: 0;
   padding: 2px;                /* grosor del trazo */
   border-radius: inherit;
-  background: conic-gradient(var(--accent) var(--p), transparent 0);
+  background: conic-gradient(transparent calc(100% - var(--p)),  var(--accent) 0);
   mask: linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
   mask-composite: exclude;     /* deja solo el anillo */
@@ -362,7 +362,7 @@ header{
 .btn-subscription:hover .premium-icon {
     animation: crown-shake 0.6s ease-in-out;
 }
-
+/* Movimiento de la corona*/
 @keyframes crown-shake {
     0%, 100% { transform: rotate(0); }
     20% { transform: rotate(-12deg); }
@@ -504,7 +504,7 @@ header{
   width: 0; height: 0;
   border-left: 16px solid currentColor;
   border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
+  border-bottom: 10px solid transparent; 
   transition: transform .25s;
 }
 
@@ -606,7 +606,7 @@ header{
   text-align: left;
   font-weight: bold;
   font-family: sans-serif;
-  transform: translateY(100%);   /* escondido debajo de la tarjeta */
+  transform: translateY(100%);   
   transition: transform 0.3s ease;
 }
 
@@ -983,6 +983,10 @@ section ul{
     padding: 12px 2px;
   }
 
+  .game-card{
+    flex: 0 0 150px;
+  }
+
   .game-card img {
     height: 130px;
     border-radius: 16px;
@@ -991,7 +995,7 @@ section ul{
   .game-title {
     padding: 10px;
     font-size: 14px;
-    transform: none;
+    transform: translateY(100%);
   }
 
   /* Los efectos hover solo se activan con mouse para evitar estados pegados al tocar. */
@@ -1100,6 +1104,35 @@ section ul{
     text-align: center;
   } 
 
+
+  .banner-content {
+    width: auto;
+    position: absolute;
+    inset: 0;
+    z-index: 1;                      /* por encima del degradado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0px 100px;
+    color: #fff;
+    
+}
+
+.banner-content h2 {
+    margin: 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    
+}
+
+.banner-content p  {
+  width: auto;
+  overflow: scroll;
+  scrollbar-width: none;
+    
+}
 
 
 
