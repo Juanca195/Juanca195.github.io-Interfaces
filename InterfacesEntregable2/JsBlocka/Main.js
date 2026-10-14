@@ -1,13 +1,13 @@
 import { Juego } from "./Juego.js";
 
 const bancoJuegos = [
-    "../Entregable/assets/fondo1.jpg",
-    "../Entregable/assets/fondo2.jpg",
-    "../Entregable/assets/fondo6.jpg",
-    "../Entregable/assets/fondo7.jpg",
-    "../Entregable/assets/fondo8.jpg",
-    "../Entregable/assets/fondo9.jpg",
-    "../Entregable/assets/fondo10.jpg"
+    "../InterfacesEntregable2/assets/fondo1.jpg",
+    "../InterfacesEntregable2/assets/fondo2.jpg",
+    "../InterfacesEntregable2/assets/fondo6.jpg",
+    "../InterfacesEntregable2/assets/fondo7.jpg",
+    "../InterfacesEntregable2/assets/fondo8.jpg",
+    "../InterfacesEntregable2/assets/fondo9.jpg",
+    "../InterfacesEntregable2/assets/fondo10.jpg"
 ];
 
 // Se podrian agregar mas niveles 

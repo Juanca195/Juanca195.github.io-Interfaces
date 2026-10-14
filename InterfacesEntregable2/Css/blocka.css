@@ -381,7 +381,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    background: var(--primary-dark-1);
+    background: var(--secondary-dark-1);
     color: white;
   }
 
@@ -586,7 +586,7 @@
 
   .btn-siguiente:hover:after,
   .btn-reintentar:hover:after,
-  .btn-blocka:after{
+  .btn-blocka:hover:after{
     left: 0;
     width: 100%;
   }
@@ -607,7 +607,7 @@
         transform: scale(1);
     }
   }
-  #ayuda {
+  .ayuda {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -625,27 +625,27 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-#ayuda svg {
+.ayuda svg {
   color: var(--accent);
   font-size: 1.1rem;
 }
 
-#ayuda:hover:not(:disabled) {
+.ayuda:hover:not(:disabled) {
   transform: translateY(-2px);
   background: linear-gradient(135deg, var(--secondary), var(--secondary-light-1));
   box-shadow: 0 6px 18px rgba(159, 76, 219, 0.45);
 }
 
-#ayuda:active:not(:disabled) {
+.ayuda:active:not(:disabled) {
   transform: translateY(0);
 }
 
-#ayuda:focus-visible {
+.ayuda:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 
-#ayuda:disabled {
+.ayuda:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   box-shadow: none;
@@ -663,7 +663,7 @@
     border: 2px solid var(--secondary-light-1);
     border-radius: 20px;
     background: var(--secondary-light-1);
-    margin: 30px 50px;
+    margin: 30px 30px;
   }
 
   /* El canvas llena exactamente la zona. Juego.js lee este tamaño con ResizeObserver
@@ -717,7 +717,7 @@
     inset: 0;
     z-index: 10;
     /* por encima del canvas y del HUD */
-    background: var(--primary-dark-1);
+    background: var(--secondary-dark-1);
     /* el mismo azul del fondo del juego */
     color: white;
     font-family: sans-serif;
