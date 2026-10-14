@@ -17,7 +17,7 @@ export class ControlClicks {
     if(this.rompecabezas.estaResuelto())return;
 
     const pieza = this.rompecabezas.buscarPieza(event.offsetX, event.offsetY);
-    if (!pieza) return;
+    if (!pieza || pieza.bloqueada) return;
 
     if (event.button === 0) {
       pieza.rotar(-90);   // click izquierdo → derecha

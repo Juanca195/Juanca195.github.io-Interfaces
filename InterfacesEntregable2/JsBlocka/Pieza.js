@@ -14,6 +14,7 @@ export class Pieza {
     this.alto = 0;
 
     this.rotacion = 0; // en grados
+    this.bloqueada = false;
   }
 
   rotar(grados) {

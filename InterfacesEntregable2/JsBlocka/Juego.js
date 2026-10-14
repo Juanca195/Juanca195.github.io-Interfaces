@@ -287,6 +287,7 @@ export class Juego {
   // this.btnAyuda.disabled = true;
 
     pieza.rotar(360 - pieza.rotacion);
+    pieza.bloqueada = true;
     this.alRotar();
   } 
 
