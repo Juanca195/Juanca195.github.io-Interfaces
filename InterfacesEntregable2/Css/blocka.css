@@ -894,49 +894,29 @@
     }
   }
 
-  /* ===== Descripción, multimedia y comentarios ===== */
-  .juego > .about,
-  .juego > .section-heading-row,
-  .juego > .content-row {
-    min-width: 0;
-    margin: 0 30px;
-  }
 
+
+
+  /* ===== Descripción, multimedia y comentarios ===== */
   .about {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    margin: 0px 30px;
   }
-
-  .about__description,
-  .about__media {
-    flex: 1;
-    min-width: 320px;
-    padding: 12px;
-    background: var(--primary-dark-2);
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .about__header {
+  
+  .about-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 10px;
   }
-
-  .about__header h2 {
-    margin: 0;
-  }
-
-  .about__rating {
+  
+  .about-rating {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
+    align-items: flex-start;
   }
 
   .stars {
@@ -946,118 +926,101 @@
     color: #898989;
   }
 
-  .stars__star--filled {
-    color: var(--accent);
+  .stars-star--filled {
+    color: var(--acento);
   }
 
-  .about__ratings-count {
-    margin: 0;
-  }
-
-  .about__text {
-    margin: 0;
-    font-size: 14px;
-    font-family: var(--font);
-    line-height: 1.4;
+  .about-text {
+    font-size: 18px;
+    font-family: var(--font-primary);
+    line-height: 1.7;
   }
 
   .about__community-link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 16px;
+    gap: 8px;
+    font-size: 20px;
     font-weight: 400;
-    color: inherit;
-    text-decoration: none;
+    font-family: var(--font-primary);
   }
 
-  .about__community-link img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+  .about-description,
+  .about-multimedia {
+    flex: 1;
+    min-width: 320px;
+    padding: 24px;
+    background: var(--primary-dark-2);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .about__media-title,
-  .about__share-title {
-    margin: 0;
+  .about-multimedia-imagenes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .about-multimedia-imagenes img {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+
+  .about-multimedia-title,
+  .about-share-title {
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 800;
   }
 
-  .about__gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .about__gallery img {
-    display: block;
-    width: 85%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    justify-self: center;
-    border-radius: 10px;
-  }
-
-  .about__share-icons {
+  
+  .about-share-icons {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    padding-top: 8px;
+    gap: 30px;
+    padding-top: 16px;
     border-top: 1px solid var(--white);
   }
 
-  .about__share-icons .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-  }
 
-  .about__share-icons img {
-    width: 24px;
-    height: 24px;
+  .about-share-icons img {
+    width: 30px;
+    height: 30px;
     object-fit: contain;
   }
 
-  .section-heading-row {
+
+  /* =====comentarios========== */
+  .section-comentarios-header-row {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 0 20px;
+    padding: 0 30px;
   }
 
-  .section-heading-row h2 {
-    margin: 0;
+  .section-comentarios-header-row h2 {
     font-size: 28px;
     font-weight: 700;
   }
 
-  .content-row {
+  .comentarios-recomendado {
     display: flex;
     gap: 60px;
     align-items: flex-start;
     flex-wrap: wrap;
   }
 
-  .comments {
+  .comentario {
     flex: 2;
     min-width: 320px;
+    margin: 30px;
   }
 
-  .Like{
-    transform: scale(-1);
-  }
-  .comments__list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .comments__new {
+  .comentario-nuevo {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -1066,137 +1029,172 @@
     margin-bottom: 10px;
   }
 
-  .comments__avatar {
+  .avatar-comentario {
     width: 20px;
     height: 20px;
     border-radius: 50%;
   }
 
-  .comments__input {
-    flex: 1;
-  }
-
-  .comments__input input {
+  .input-comentario input {
     width: 100%;
     background: none;
     border: none;
     color: var(--white);
-    font-family: var(--font-secondary);
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     letter-spacing: 0.14px;
     outline: none;
   }
 
-  .comments__input input::placeholder {
+  .input-comentario input::placeholder {
     color: var(--white);
     opacity: 1;
   }
 
-  .comment {
+  .comentarios {
     display: flex;
     justify-content: space-between;
     gap: 16px;
     padding: 10px;
   }
 
-  .comment__avatar {
+  .comment-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background: var(--white);
   }
 
-  .comment__body {
+  .comment-body {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 5px;
   }
 
-  .comment__meta {
+  .comment-meta {
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  .comment__meta > img {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-  }
-
-  .comment__author {
+  .comment-author {
     font-size: 13px;
     font-weight: 600;
   }
 
-  .comment__time {
+  .comment-time {
     font-size: 13px;
     font-weight: 300;
   }
 
-  .comment__text {
-    margin: 0;
+  .comment-text {
     font-size: 14px;
   }
 
-  .comment__actions {
+  .comment-actions {
     display: flex;
     align-items: center;
     gap: 30px;
     padding: 5px 0;
   }
 
-  .comment__actions .icon-btn {
-    width: 24px;
+  .like{
+    transform: scale(-1);
+  }
+
+  .comment-actions .icon-btn {
+    width:  24px;
     height: 24px;
-    padding: 0;
     background: none;
-    border: 0;
-    cursor: pointer;
+    padding: 0;
   }
 
-  .comment__actions .icon-btn img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+   .icon-btn {
+    width: 48px;
+    height: 36px;
+    padding: 8px 12px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .comment__reply {
-    padding: 0;
-    border: 0;
-    background: none;
-    color: inherit;
-    font: inherit;
+  .comment-response {
     font-size: 18px;
     font-weight: 600;
-    cursor: pointer;
+    border: none;
+    background: none;
+    color: var(--white);
   }
 
-  .comment__menu {
+  .comment-menu {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: inherit;
-    cursor: pointer;
+    background:none;
+    border: none;
+    color: var(--white);
   }
 
-  .comment__menu .icon--dots::before {
-    content: "⋮";
-    font-size: 22px;
-    line-height: 1;
+
+
+  /* ===== Juegos relacionados ===== */
+  .related {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
 
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+  .related__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .related-game {
+    display: flex;
+    gap: 10px;
+  }
+
+  .related-game img {
+    width: 250px;
+    height: 159px;
+    border-radius: 30px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .related-game__info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .related-game__info h3 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .related-game__info p {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .related-game .stars {
+    font-size: 17px;
+  }
+
+  .btn--related-more {
+    padding: 12px 16px;
+    background: var(--secundario-1);
+    border-radius: 25px;
+    font-size: 24px;
+    font-weight: 700;
   }
 
   /* ===== Footer ===== */
