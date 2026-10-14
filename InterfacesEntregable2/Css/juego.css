@@ -356,8 +356,7 @@
     width: 48px;
     height: 36px;
     padding: 8px 12px;
-    background: var(--secundario-1);
-    border-radius: 25px;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;

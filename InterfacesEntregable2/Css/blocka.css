@@ -340,6 +340,7 @@
   }
   
 
+  
 
 
 
@@ -357,14 +358,18 @@
   .game-stage {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 500px;
-    grid-template-rows: 70px minmax(0, 1fr);
+    grid-template-rows:  30px 80vh;
     grid-template-areas:
       "encabezado     encabezado"
       "canvas         instrucciones";
-    gap: 10px;
+    
     width: 100%;
     height: 100vh;
     min-height: 600px;
+  }
+
+  .game-stage .breadcrumb{
+    margin: 0 30px;
   }
 
   .titulo {
@@ -663,7 +668,7 @@
     border: 2px solid var(--secondary-light-1);
     border-radius: 20px;
     background: var(--secondary-light-1);
-    margin: 30px 30px;
+    margin: 0px 30px;
   }
 
   /* El canvas llena exactamente la zona. Juego.js lee este tamaño con ResizeObserver
@@ -1009,6 +1014,7 @@
 
   .comentarios-recomendado {
     display: flex;
+    flex-direction: row;
     gap: 60px;
     align-items: flex-start;
     flex-wrap: wrap;
