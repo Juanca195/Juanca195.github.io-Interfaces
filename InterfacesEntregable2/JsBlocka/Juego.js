@@ -181,10 +181,11 @@ export class Juego {
       miniatura.src = src;   // ya está en caché, aparece al instante
       miniatura.alt = "";
 
-      const nombre = document.createElement("figcaption");
-      nombre.textContent = src.split("/").pop();
+      //utilizaado para los nombre de las imagenes
+      // const nombre = document.createElement("figcaption");
+      // nombre.textContent = src.split("/").pop();
 
-      figura.append(miniatura, nombre);
+      figura.append(miniatura);
       contenedor.appendChild(figura);
       return figura;
     });

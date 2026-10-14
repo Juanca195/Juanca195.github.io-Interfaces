@@ -969,7 +969,10 @@
   }
 
   .about-multimedia-imagenes img {
+    display: grid;
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
     border-radius: 20px;
   }
 
@@ -1012,7 +1015,7 @@
     font-weight: 700;
   }
 
-  .comentarios-recomendado {
+  .comentarios-recomendados {
     display: flex;
     flex-direction: row;
     gap: 60px;
@@ -1196,9 +1199,9 @@
   }
 
   .btn--related-more {
-    padding: 12px 16px;
-    background: var(--secundario-1);
-    border-radius: 25px;
+    background: transparent;
+    border: none;
+    color: #fff;
     font-size: 24px;
     font-weight: 700;
   }
