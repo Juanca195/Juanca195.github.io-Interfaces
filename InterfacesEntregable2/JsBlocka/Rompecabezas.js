@@ -2,7 +2,7 @@ import { Pieza } from "./Pieza.js";
 
 // Maneja el CONJUNTO de piezas: las crea una sola vez 
 export class Rompecabezas {
-  constructor(img,filas = 3, column = 3, espacio = 20) {
+  constructor(img,filas = 3, column = 3, espacio = 5) {
     this.img = img;
     this.filas = filas;
     this.column = column; 
@@ -56,8 +56,8 @@ export class Rompecabezas {
   const zonaAlto = this.ladoOrigen * this.filas;
 
   const escala = Math.min(
-    (canvasAncho * 0.6) / zonaAncho,
-    (canvasAlto * 0.6) / zonaAlto
+    (canvasAncho * 0.8) / zonaAncho,
+    (canvasAlto * 0.8) / zonaAlto
   );
 
   const lado = this.ladoOrigen * escala; // lado de cada pieza en el canvas
