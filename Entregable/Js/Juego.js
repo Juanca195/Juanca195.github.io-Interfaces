@@ -36,6 +36,11 @@ export class Juego {
     this.btnSiguiente = document.getElementById("btnSiguiente");
     this.btnSiguiente.addEventListener("click", () => this.siguienteNivel());
 
+    // Pantalla incial del juego
+    this.pantallaInicialJuego = document.getElementById("pantallaInicialJuego");
+    this.botonJugarBlocka = document.getElementById("btn-jugar-blocka");
+    this,this.botonJugarBlocka.addEventListener('click', () => this.comenzar());
+    
     // Plantilla de carga
     this.pantallaCarga = document.getElementById("pantallaCarga");
     this.textoCarga = document.getElementById("textoCarga");
@@ -65,7 +70,14 @@ export class Juego {
 
   }
 
-  
+  comenzar(){
+    if (this.botonJugarBlocka.disabled) return;
+
+    this.pantallaInicialJuego.hidden = true;
+    this.pantallaCarga.hidden = false;
+    this.presentarNivel();
+
+  }
 
   // Identifica al nivel por su grilla ("2x2", "2x3"...), no por su posición
   claveNivel() {
@@ -94,7 +106,7 @@ export class Juego {
           this.cargadas.set(src, await this.cargarImagen(src));
         })
       );
-      await this.presentarNivel();
+       this.botonJugarBlocka.disabled = false;
     } catch (error) {
       this.textoCarga.textContent = error.message;
       this.spinner.hidden = true;

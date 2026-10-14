@@ -453,7 +453,7 @@ header {
 .banner-slide {
   position: relative;
   flex: 0 0 100%;
-  height: clamp(300px, 40vw, 480px);
+  height: clamp(300px, 25vw, 480px);
   overflow: hidden;
 }
 

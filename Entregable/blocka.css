@@ -372,7 +372,35 @@
     font-size: 28px;
   }
 
-  
+    .pantalla-home-juego{
+    position: absolute;
+    inset: 0;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: var(--primary-dark-1);
+    color: white;
+  }
+
+  .pantalla-home-juego .inicio-juego{
+    position: static;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pantalla-home-juego .inicio-juego img {
+    display: block;
+    width: min(70%, 420px);
+    height: auto;
+    max-height: 45vh;
+    object-fit: contain;
+    object-position: center;
+  }
   
   /* ---------- PANEL DE INSTRUCCIONES ---------- */
   .panel-derecho {
@@ -501,7 +529,8 @@
 
 
   .btn-siguiente,
-  .btn-reintentar {
+  .btn-reintentar,
+  .btn-blocka {
     width: auto;
     height: auto;
     color: #fff;
@@ -524,14 +553,16 @@
 
 
   .btn-siguiente,
-  .btn-reintentar {
+  .btn-reintentar,
+  .btn-blocka {
     background: var(--secondary-dark-2);
     border: 2px solid var(--secondary-light-1);
     z-index: 1;
   }
 
   .btn-siguiente:after,
-  .btn-reintentar:after{
+  .btn-reintentar:after,
+  .btn-blocka:after{
     position: absolute;
     content: "";
     width: 0;
@@ -548,18 +579,21 @@
   }
 
   .btn-siguiente:hover,
-  .btn-reintentar:hover {
+  .btn-reintentar:hover,
+  .btn-blocka:hover {
     color: #fff;
   }
 
   .btn-siguiente:hover:after,
-  .btn-reintentar:hover:after{
+  .btn-reintentar:hover:after,
+  .btn-blocka:after{
     left: 0;
     width: 100%;
   }
 
   .btn-siguiente:active,
-  .btn-reintentar:active  {
+  .btn-reintentar:active,
+  .btn-blocka:active  {
     top: 2px;
   }
 
