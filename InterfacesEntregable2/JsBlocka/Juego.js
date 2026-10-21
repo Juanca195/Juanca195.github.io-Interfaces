@@ -135,6 +135,7 @@ export class Juego {
       .map((_, i) => i)
       .filter((i) => this.imagenes.length < 2 || i !== this.ultimaImagen);
     return opciones[Math.floor(Math.random() * opciones.length)];
+    
   }
 
   // Muestra la plantilla, sortea la imagen del nivel actual con la ruleta,
@@ -235,8 +236,9 @@ export class Juego {
       (ctx, canvas) => Filtros.grises(ctx, canvas),
       (ctx, canvas) => Filtros.brillo(ctx, canvas, 30),
       (ctx, canvas) => Filtros.negativo(ctx, canvas),
+      (ctx,canvas) => Filtros.blur(ctx,canvas,5,1)
     ];
-    return filtros[Math.floor(Math.random() * filtros.length)];
+    return filtros[Math.floor(Math.random() * filtros.length)] ;
   }
 
   // Arma el nivel actual con la imagen que eligió la ruleta (ya cargada)
@@ -256,7 +258,7 @@ export class Juego {
     } else {
       this.controlClicks.rompecabezas = this.rompecabezas;
     }
-
+  
     this.filtro = this.elegirFiltroAleatorio();
     this.actualizarHud(filas * columnas);
     this.canvas.style.cursor = "pointer";
@@ -272,7 +274,7 @@ export class Juego {
   }
   // usarAyuda():
   usarAyuda() {
-    //agregar aca un this.ayudaUsada
+    
     if (!this.rompecabezas || this.perdio) return;
 
     const pieza = this.rompecabezas.piezas.find(
@@ -281,10 +283,11 @@ export class Juego {
     if(!pieza)return;
 
     this.cronometro.restar(5);
+    
     if (this.perdio) return;
 
-  // this.ayudaUsada = true;
-  // this.btnAyuda.disabled = true;
+  /*  this.ayudaUsada = true;
+   this.btnAyuda.disabled = true; */
 
     pieza.rotar(360 - pieza.rotacion);
     pieza.bloqueada = true;
@@ -336,8 +339,8 @@ export class Juego {
     this.btnSiguiente.hidden = true;
     // El % hace que después del último nivel vuelva al primero
     this.nivelActual = (this.nivelActual + 1) % this.niveles.length; 
-//     this.ayudaUsada = false;
-// this.btnAyuda.disabled = false;   
+//  this.ayudaUsada = false;
+//  this.btnAyuda.disabled = false;   
     this.presentarNivel(); 
   }
 
