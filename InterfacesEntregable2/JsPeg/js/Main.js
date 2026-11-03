@@ -20,8 +20,8 @@ const elementoInstrucciones = document.getElementById("instrucciones");
 // 2. Definir las fichas disponibles (temática DBZ)
 // Cada una es una instancia de Ficha, con nombre + ruta de imagen
 
-const fichaDragon = new Ficha("Dragon", new URL("../assets/ficha_dragon.png", import.meta.url).href);
-const fichaEsfera = new Ficha("Esfera",new URL("../assets/ficha_esfera.png", import.meta.url).href);
+const fichaDragon = new Ficha("Dragon", new URL("../../assets/ficha_dragon.png", import.meta.url).href);
+const fichaEsfera = new Ficha("Esfera",new URL("../../assets/ficha_esfera.png", import.meta.url).href);
 
 const listaDeFichasDisponibles = [fichaDragon, fichaEsfera];
 
@@ -29,7 +29,7 @@ const listaDeFichasDisponibles = [fichaDragon, fichaEsfera];
 // 3. Imagen de fondo del tablero vacío
 // ===================================================
 const imagenFondoTablero = new Image();
-imagenFondoTablero.src = new URL("../assets/fondoPeg.jpg", import.meta.url).href;
+imagenFondoTablero.src = new URL("../../assets/fondoPeg.jpg", import.meta.url).href;
 
 // ===================================================
 // 4. Configuración de tamaño y tiempo
