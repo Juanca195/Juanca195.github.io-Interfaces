@@ -15,7 +15,8 @@ const niveles = [
     {filas: 2, columnas: 2, tiempo : 40},
     {filas: 2, columnas: 3, tiempo : 60},
     {filas: 2, columnas: 4, tiempo : 90},
-    {filas: 3, columnas: 3, tiempo : 90}
+    {filas: 3, columnas: 3, tiempo : 90},
+    
 ];
  
 const juego = new Juego("myCanvas", bancoJuegos, niveles);
