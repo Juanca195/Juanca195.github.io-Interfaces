@@ -17,7 +17,7 @@
 .zona-juego {
   display: grid;
   grid-template-columns: 700px 600px;
-  gap: 100px;
+  gap: 90%;
   align-items: start;
   width: max-content;
   max-width: 100%;
@@ -48,7 +48,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
   text-align: left;
   background: #723c09;
   border-radius: 8px;
@@ -128,11 +127,11 @@
   transition: opacity 300ms ease, transform 300ms ease, visibility 0s;
 }
 
-#temporizador {
-  margin-bottom: 12px;
+.temporizador-juego {
+  margin-bottom: 10px;
   color: #ffe0a3;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
   text-align: center;
 }
@@ -157,43 +156,6 @@
 .acciones-juego button:hover {
   background: #a56a32;
   border-color: #ffd27a;
-}
-
-@media (max-width: 800px) {
-  .peg-solitaire {
-    width: 100%;
-    margin: 12px auto;
-    padding: 0 10px;
-  }
-
-  .zona-juego {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
-    width: 100%;
-    padding: 12px;
-  }
-
-  .area-tablero,
-  .barra-superior {
-    width: 100%;
-  }
-
-  .panel-lateral {
-    width: 100%;
-    min-height: 0;
-    margin-top: 0;
-  }
-
-  #canvas {
-    width: 100%;
-    max-width: 700px;
-    height: auto;
-    aspect-ratio: 7 / 6;
-  }
-
-  .instrucciones-imagen {
-    max-width: 100%;
-  }
 }
 
 @media (max-width: 480px) {
@@ -239,3 +201,77 @@
   justify-content: center;
   text-align: center;
 }
+
+/* Ajuste para que el juego entre mejor en la pantalla */
+@media (min-width: 801px) {
+  .peg-solitaire {
+    width: 100%;
+    max-width: 1400px;
+    /* margin: 12px auto;
+    padding: 0 16px; */
+  }
+
+  .zona-juego {
+    width: 100%;
+    grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+    gap: clamp(12px, 2vw, 28px);
+  }
+
+  .area-tablero {
+    min-width: 0;
+  }
+
+  #canvas {
+    width: min(700px, 70%);
+    height: auto;
+    aspect-ratio: 7 / 6;
+  }
+
+  .panel-lateral {
+    width: 100%;
+    min-width: 0;
+    margin-top: 0;
+    gap: 24px;
+  }
+
+  .instrucciones-imagen {
+    width: min(100%, 200px);
+    max-height: 18vh;
+    object-fit: contain;
+  }
+}
+
+.breadcrumb {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.peg-solitaire {
+  margin-top: 0px; /* ponelo en 0 si querés que suba más */
+}
+
+@media (max-width: 900px) {
+  .breadcrumb {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+.barra-superior,
+.controles-juego {
+  width: min(700px, 84%);
+  box-sizing: border-box;
+}
+.instrucciones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* espacio entre "Cómo jugar" y cada paso */
+}
+
+.instrucciones-paso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* espacio entre subtítulo, imagen y texto */
+}
+
+
