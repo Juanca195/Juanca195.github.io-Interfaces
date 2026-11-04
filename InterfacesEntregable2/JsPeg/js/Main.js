@@ -29,6 +29,8 @@ const listaDeFichasDisponibles = [fichaDragon, fichaEsfera];
 // ===================================================
 const imagenFondoTablero = new Image();
 imagenFondoTablero.src = new URL("../../assets/fondoPeg.jpg", import.meta.url).href;
+const imagenLogoJuego = new Image();
+imagenLogoJuego.src = new URL("../../assets/logo.png", import.meta.url).href;
 
 // ===================================================
 // 4. Configuración de tamaño y tiempo
@@ -47,7 +49,13 @@ const temporizador = new Temporizador(DURACION_DEL_JUEGO_EN_SEGUNDOS);
 // ===================================================
 // 6. Instanciar la View
 // ===================================================
-const vistaTablero = new VistaTablero(elementoCanvas, ANCHO_CELDA, ALTO_CELDA, imagenFondoTablero);
+const vistaTablero = new VistaTablero(
+  elementoCanvas,
+  ANCHO_CELDA,
+  ALTO_CELDA,
+  imagenFondoTablero,
+  imagenLogoJuego
+);
 const vistaMenu = new VistaMenu(elementoContenedorMenu,
   listaDeFichasDisponibles,
   elementoPantallaSeleccion,
@@ -117,7 +125,6 @@ botonCambiarFicha.addEventListener("click", function () {
 // 11. Arrancar el juego (muestra el menú de selección de ficha)
 // ===================================================
 juego.iniciar();
-
 
 
 

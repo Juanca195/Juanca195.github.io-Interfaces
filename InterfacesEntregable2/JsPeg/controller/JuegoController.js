@@ -77,21 +77,30 @@ export class Juego {
   }
 
   async mostrarMensajeSeleccion(SELECCION_DE_FICHA) {
-    const imagenFondo = this.vistaTablero.imagenFondo;
+    const imagenesSeleccion = [
+      [this.vistaTablero.imagenFondo, "No se pudo cargar la imagen de fondo."],
+      [this.vistaTablero.imagenLogo, "No se pudo cargar el logo del juego."],
+    ];
 
-    if (!imagenFondo.complete) {
-      await new Promise((resolve, reject) => {
-        imagenFondo.addEventListener("load", resolve, { once: true });
-        imagenFondo.addEventListener(
+    await Promise.all(imagenesSeleccion.map(([imagen, mensajeError]) => {
+      if (imagen.complete) {
+        return imagen.naturalWidth > 0
+          ? Promise.resolve()
+          : Promise.reject(new Error(mensajeError));
+      }
+
+      return new Promise((resolve, reject) => {
+        imagen.addEventListener("load", resolve, { once: true });
+        imagen.addEventListener(
           "error",
-          () => reject(new Error("No se pudo cargar la imagen de fondo.")),
+          () => reject(new Error(mensajeError)),
           { once: true }
         );
       });
-    }
+    }));
 
-    if (imagenFondo.naturalWidth === 0) {
-      throw new Error("No se pudo cargar la imagen de fondo.");
+    if (this.fichaElegida) {
+      return;
     }
 
     this.vistaTablero.dibujarFondo();
