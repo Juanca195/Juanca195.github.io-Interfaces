@@ -8,14 +8,12 @@ export class VistaMenu {
     this.listaDeFichasDisponibles = listaDeFichasDisponibles; // varios tipos de ficha (req. 9)
     this.pantallaSeleccion = pantallaSeleccion;
     this.controlesJuego = controlesJuego;
-    this.instrucciones = instrucciones;
   }
 
 
   mostrarSelectorDeFicha(alElegirFicha) {
     this.pantallaSeleccion.hidden = false;
     this.controlesJuego.classList.remove("visible");
-    this.instrucciones.hidden = true;
     //limpia el contenedor pos si llama mas de una vez 
     this.contenedorHTML.replaceChildren();
 
@@ -48,7 +46,6 @@ export class VistaMenu {
   ocultar() {
     this.pantallaSeleccion.hidden = true;
     this.controlesJuego.classList.add("visible");
-    this.instrucciones.hidden = false;
   }
 
 }

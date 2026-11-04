@@ -14,7 +14,6 @@ const elementoContenedorMenu = document.getElementById("selectorFichas");
 const elementoTemporizador = document.getElementById("temporizador");
 const elementoPantallaSeleccion = document.getElementById("pantallaSeleccion");
 const elementoControlesJuego = document.getElementById("controlesJuego");
-const elementoInstrucciones = document.getElementById("instrucciones");
 
 
 // 2. Definir las fichas disponibles (temática DBZ)
@@ -52,8 +51,7 @@ const vistaTablero = new VistaTablero(elementoCanvas, ANCHO_CELDA, ALTO_CELDA, i
 const vistaMenu = new VistaMenu(elementoContenedorMenu,
   listaDeFichasDisponibles,
   elementoPantallaSeleccion,
-  elementoControlesJuego,
-  elementoInstrucciones);
+  elementoControlesJuego);
 const vistaTemporizador = new VistaTemporizador(elementoTemporizador);
 
 // ===================================================

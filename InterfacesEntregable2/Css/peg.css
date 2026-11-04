@@ -1,271 +1,238 @@
   /* Estilos del tablero Peg Solitaire */
-#canvas {
-  display: block;
-  width: 700px;
-  height: 600px;
-  border: 2px solid #000;
-  border-radius: 8px;
-}
-
-.peg-solitaire {
-  width: max-content;
-  max-width: 100%;
-  margin: 24px auto;
-  color: #fff;
-}
-
-.zona-juego {
-  display: grid;
-  grid-template-columns: 700px 600px;
-  gap: 90%;
-  align-items: start;
-  width: max-content;
-  max-width: 100%;
-  padding: 16px;
-  background: #ff7b00;
-  border: 2px solid #fff;
-  border-radius: 25px;
-}
-
-.area-tablero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-}
-
-.barra-superior {
-  display: flex;
-  min-height: 64px;
-  align-items: center;
-}
-
-.panel-lateral {
-  position: static;
-  width: 80%;
-  min-height: 100%;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  background: #723c09;
-  border-radius: 8px;
-}
-
-.instrucciones-imagen {
-  display: block;
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  border-radius: 8px;
-}
-
-#selectorFichas {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.opcion-ficha {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #d99a54;
-  border-radius: 12px;
-  background: #8b5a2b;
-  color: #fff;
-  font: 600 1rem "Exo 2", sans-serif;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color 160ms ease, transform 160ms ease,
-    border-color 160ms ease;
-}
-
-.opcion-ficha:hover {
-  background: #a56a32;
-  border-color: #ffd27a;
-  transform: translateY(-2px);
-}
-
-.opcion-ficha:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 3px;
-}
-
-.opcion-ficha img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-}
-
-.controles-juego {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #d99a54;
-  border-radius: 12px;
-  background: #613308;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-12px);
-  pointer-events: none;
-  transition: opacity 300ms ease, transform 300ms ease,
-    visibility 0s linear 300ms;
-}
-
-.controles-juego.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto;
-  transition: opacity 300ms ease, transform 300ms ease, visibility 0s;
-}
-
-.temporizador-juego {
-  margin-bottom: 10px;
-  color: #ffe0a3;
-  font-size: 2rem;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-}
-
-.acciones-juego {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.acciones-juego button {
-  flex: 1 1 90px;
-  padding: 10px;
-  border: 2px solid #d99a54;
-  border-radius: 10px;
-  background: #8b5a2b;
-  color: #fff;
-  font: 600 1rem "Exo 2", sans-serif;
-  cursor: pointer;
-}
-
-.acciones-juego button:hover {
-  background: #a56a32;
-  border-color: #ffd27a;
-}
-
-@media (max-width: 480px) {
-  .zona-juego {
-    padding: 8px;
-    border-radius: 16px;
+  #canvas {
+    display: block;
+    height: min(700px, calc(100vh - 220px));  
+    width: auto;
+    max-width: 100%;
+    aspect-ratio: 7 / 6;
+    border: 2px solid #000;
+    border-radius: 8px;
   }
 
-  .acciones-juego {
-    width: 100%;
-  }
-
-  .acciones-juego button {
-    flex: 1 1 100%;
-  }
-
-  .opcion-ficha {
-    min-height: 64px;
-  }
-}
-.panel-lateral {
-  align-items: center;
-  text-align: center;
-}
-
-#pantallaSeleccion,
-.instrucciones {
-  width: 100%;
-}
-
-.instrucciones-paso {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.instrucciones-imagen {
-  margin-inline: auto;
-}
-
-#selectorFichas .opcion-ficha {
-  justify-content: center;
-  text-align: center;
-}
-
-/* Ajuste para que el juego entre mejor en la pantalla */
-@media (min-width: 801px) {
   .peg-solitaire {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 20px;
     width: 100%;
     max-width: 1400px;
-    /* margin: 12px auto;
-    padding: 0 16px; */
+    margin: 8px auto;
+    color: #fff;
   }
 
   .zona-juego {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
     width: 100%;
-    grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
-    gap: clamp(12px, 2vw, 28px);
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 10px;
+    background: url("../assets/fondo_tablero.jpg") no-repeat center center;
+    border: 2px solid #fff;
+    border-radius: 25px;
   }
 
   .area-tablero {
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
   }
 
-  #canvas {
-    width: min(700px, 70%);
-    height: auto;
-    aspect-ratio: 7 / 6;
-  }
+
 
   .panel-lateral {
-    width: 100%;
-    min-width: 0;
-    margin-top: 0;
-    gap: 24px;
+    display: flex;
+    flex: 0 0 340px;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: auto;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 12px;
+    overflow-y: auto;
+    text-align: center;
+    background: #723c09;
+    border-radius: 8px;
   }
 
   .instrucciones-imagen {
-    width: min(100%, 200px);
-    max-height: 18vh;
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: min(12vh, 100px);
+    border-radius: 8px;
     object-fit: contain;
   }
-}
 
-.breadcrumb {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.peg-solitaire {
-  margin-top: 0px; /* ponelo en 0 si querés que suba más */
-}
-
-@media (max-width: 900px) {
-  .breadcrumb {
-    padding-top: 0;
-    padding-bottom: 0;
+  .barra-superior {
+    display: grid;
+    width: 100%;
   }
-}
-.barra-superior,
-.controles-juego {
-  width: min(700px, 84%);
-  box-sizing: border-box;
-}
-.instrucciones-paso {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px; /* espacio entre subtítulo, imagen y texto */
-}
+
+  .barra-superior>#pantallaSeleccion,
+  .barra-superior>#controlesJuego {
+    grid-area: 1 / 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #pantallaSeleccion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px;
+    border: 1px solid #d99a54;
+    border-radius: 12px;
+    background: #613308;
+    text-align: center;
+  }
+
+  #pantallaSeleccion[hidden] {
+    display: none;
+  }
+
+  #selectorFichas {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .opcion-ficha {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 6px;
+    border: 2px solid #d99a54;
+    border-radius: 12px;
+    background: #8b5a2b;
+    color: #fff;
+    font: 600 1rem "Exo 2", sans-serif;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .opcion-ficha:hover {
+    background: #a56a32;
+    border-color: #ffd27a;
+    transform: translateY(-2px);
+  }
+
+  .opcion-ficha:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+
+  .opcion-ficha img {
+     width: 48px;
+  height: 48px;
+  object-fit: contain;
+  }
+
+  .controles-juego {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 8px;
+    border: 1px solid #d99a54;
+    border-radius: 12px;
+    background: #613308;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    pointer-events: none;
+    transition: opacity 300ms ease, transform 300ms ease,
+      visibility 0s linear 300ms;
+  }
+
+  .controles-juego.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: opacity 300ms ease, transform 300ms ease, visibility 0s;
+  }
+
+  .temporizador-juego {
+    margin: 0;
+    color: #ffe0a3;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  .acciones-juego {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .acciones-juego button {
+    flex: 1 1 90px;
+    padding: 5  px 10px;
+    border: 2px solid #d99a54;
+    border-radius: 10px;
+    background: #8b5a2b;
+    color: #fff;
+    font: 600 1rem "Exo 2", sans-serif;
+    cursor: pointer;
+  }
+
+  .acciones-juego button:hover {
+    background: #a56a32;
+    border-color: #ffd27a;
+  }
 
 
+
+  .instrucciones {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .instrucciones h2 {
+    width: 100%;
+    margin: 0;
+    font-size: 20px;
+    color: #ffffff;
+    background: #2a1605;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  .instrucciones-paso {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
+    gap: 16px;
+  }
+
+
+  .instrucciones-imagen {
+    display: block;
+    width: min(100%, 200px);
+    max-height: 90px;
+    height: auto;
+    margin-inline: auto;
+    object-fit: contain;
+  }
+
+  #selectorFichas .opcion-ficha {
+    justify-content: center;
+    text-align: center;
+  }

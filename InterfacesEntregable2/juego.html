@@ -92,54 +92,53 @@
   <main>
 
     <div class="peg-solitaire">
-        <div class="zona-juego">
-            <section class="area-tablero">
-                <div class="barra-superior">
-                    
-                    <section class="controles-juego" id="controlesJuego">
-                        <div class= "temporizador-juego" id="temporizador"></div>
-                        <div class="acciones-juego">
-                            <button id="botonReiniciar" type="button">Reiniciar</button>
-                            <button id="botonCambiarFicha" type="button">Cambiar ficha</button>
-                        </div>
-                    </section>
-                </div>
-                
-                <canvas id="canvas" width="700" height="600"></canvas>
+      <div class="zona-juego">
+        <section class="area-tablero">
+          <div class="barra-superior">
+            <section id="pantallaSeleccion">
+              <div id="selectorFichas"></div>
             </section>
-            
-            <aside class="panel-lateral">
-                <section id="pantallaSeleccion">
-                    <h2>Seleccionar ficha</h2>
-                    <p>Selecciona una ficha para comenzar el juego.</p>
-                    <div id="selectorFichas"></div>
-                </section>
 
-                <section class="instrucciones" id="instrucciones">
-                    <h2>Cómo jugar</h2>
+            <section class="controles-juego" id="controlesJuego">
+              <div class="temporizador-juego" id="temporizador"></div>
+              <div class="acciones-juego">
+                <button id="botonReiniciar" type="button">Reiniciar</button>
+                <button id="botonCambiarFicha" type="button">Cambiar ficha</button>
+              </div>
+            </section>
+          </div>
 
-                    <article class="instrucciones-paso">
-                        <h3>Saltá sobre una ficha</h3>
-                        <img src="./assets/imagen_ilustrativa_de_juego.png"
-                            alt="Una ficha salta sobre otra hacia un pozo vacío." class="instrucciones-imagen">
-                        <p>Mové una ficha en línea recta sobre otra ficha hasta un pozo vacío. La ficha saltada se
-                            retira del
-                            tablero.</p>
-                    </article>
+          <canvas id="canvas" width="700" height="600"></canvas>
+          <p class="mensaje-juego" id="mensajeJuego" role="status" aria-live="polite" hidden></p>
+        </section>
 
-                    <article class="instrucciones-paso">
-                        <h3>Intentá dejar una sola ficha</h3>
-                        <img src="./assets/ejemplo_ganador.png" alt="Tablero con una sola ficha restante."
-                            class="instrucciones-imagen">
-                        <p>Seguí haciendo movimientos válidos. El objetivo es terminar con una sola ficha en el tablero.
-                        </p>
-                    </article>
-                </section>
-
-            </aside>
-        </div>
-      
       </div>
+
+      <aside class="panel-lateral">
+
+        <section class="instrucciones">
+          <h2>Cómo jugar</h2>
+
+          <article class="instrucciones-paso">
+            <h3>Saltá sobre una ficha</h3>
+            <img src="./assets/imagen_ilustrativa_de_juego.png" alt="Una ficha salta sobre otra hacia un pozo vacío."
+              class="instrucciones-imagen">
+            <p>Mové una ficha en línea recta sobre otra ficha hasta un pozo vacío. La ficha saltada se
+              retira del
+              tablero.</p>
+          </article>
+
+          <article class="instrucciones-paso">
+            <h3>Intentá dejar una sola ficha</h3>
+            <img src="./assets/ejemplo_ganador.png" alt="Tablero con una sola ficha restante."
+              class="instrucciones-imagen">
+            <p>Seguí haciendo movimientos válidos. El objetivo es terminar con una sola ficha en el tablero.
+            </p>
+          </article>
+        </section>
+
+      </aside>
+    </div>
 
     <section class="about">
       <article class="about__description">
@@ -538,4 +537,5 @@
   </footer>
   <script type="module" src="./JsPeg/js/Main.js"></script>
 </body>
+
 </html>
