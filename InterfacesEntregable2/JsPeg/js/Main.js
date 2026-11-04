@@ -59,10 +59,9 @@ const vistaTemporizador = new VistaTemporizador(elementoTemporizador);
 // ===================================================
 const juego = new Juego(tablero, vistaTablero, vistaMenu, vistaTemporizador, temporizador);
 
-// ===================================================
+
 // 8. Conectar los callbacks del Temporizador con el Controller
 // (el Model avisa, el Controller decide qué hacer)
-// ===================================================
 temporizador.alActualizar = function (segundosRestantes) {
   vistaTemporizador.actualizar(segundosRestantes);
 };
@@ -71,10 +70,10 @@ temporizador.alFinalizarTiempo = function () {
   juego.alAgotarseElTiempo();
 };
 
-// ===================================================
+
 // 9. Conectar los eventos del mouse sobre el canvas
 // con los métodos del Controller (drag and drop)
-// ===================================================
+
 elementoCanvas.addEventListener("mousedown", function (eventoMouse) {
   const posicionDelCanvas = elementoCanvas.getBoundingClientRect();
   const posicionXClic = eventoMouse.clientX - posicionDelCanvas.left;
@@ -91,7 +90,9 @@ elementoCanvas.addEventListener("mousemove", function (eventoMouse) {
   juego.manejarMouseMove(posicionXActualMouse, posicionYActualMouse);
 });
 
-elementoCanvas.addEventListener("mouseup", function (eventoMouse) {
+//El window para que al soltar el click la ficha vuelva a su lugar
+// para cumplir cuando suelte en toda la pantalla
+window.addEventListener("mouseup", function (eventoMouse) {
   const posicionDelCanvas = elementoCanvas.getBoundingClientRect();
   const posicionXSoltar = eventoMouse.clientX - posicionDelCanvas.left;
   const posicionYSoltar = eventoMouse.clientY - posicionDelCanvas.top;

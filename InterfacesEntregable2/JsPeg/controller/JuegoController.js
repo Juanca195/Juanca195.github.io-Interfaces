@@ -1,8 +1,6 @@
-// ===================================================
 // CONTROLLER: Juego
 // Orquesta todo: selección de ficha, drag and drop,
 // validación de movimientos, timer, fin del juego.
-// ===================================================
 export class Juego {
   constructor(tablero, vistaTablero, vistaMenu, vistaTemporizador, temporizador) {
     this.tablero = tablero;
