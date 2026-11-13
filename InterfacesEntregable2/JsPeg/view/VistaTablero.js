@@ -1,10 +1,11 @@
 export class VistaTablero {
-  constructor(canvas, anchoCelda, altoCelda, imagenFondo) {
+  constructor(canvas, anchoCelda, altoCelda, imagenFondo, imagenLogo) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.anchoCelda = anchoCelda;
     this.altoCelda = altoCelda;
     this.imagenFondo = imagenFondo; // imagen de fondo del tablero vacío (req. 1)
+    this.imagenLogo = imagenLogo;
   }
 
   dibujarFondo() {
@@ -237,17 +238,34 @@ export class VistaTablero {
       throw new Error(`Estado de juego desconocido: ${estadoDelJuego}`);
     }
 
+    if (estadoDelJuego === "SELECCION_DE_FICHA") {
+      this.dibujarLogoJuego();
+    }
+
     this.ctx.save();
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
     this.ctx.fillRect(0, this.canvas.height / 2 - 35, this.canvas.width, 70);
 
     this.ctx.fillStyle = "#ffffff";
-    this.ctx.font = "24px sans-serif";
+    this.ctx.font = '700 24px "Exo 2", sans-serif';
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
     this.ctx.fillText(mensaje, this.canvas.width / 2, this.canvas.height / 2);
     this.ctx.restore();
   }
 
- 
+  dibujarLogoJuego() {
+    const anchoMaximo = Math.min(460, this.canvas.width - 40);
+    const altoMaximo = 230;
+    const escala = Math.min(
+      anchoMaximo / this.imagenLogo.naturalWidth,
+      altoMaximo / this.imagenLogo.naturalHeight
+    );
+    const ancho = this.imagenLogo.naturalWidth * escala;
+    const alto = this.imagenLogo.naturalHeight * escala;
+    const x = (this.canvas.width - ancho) / 2;
+    const y = 28;
+
+    this.ctx.drawImage(this.imagenLogo, x, y, ancho, alto);
+  }
 }

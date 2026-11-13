@@ -13,7 +13,7 @@ export class VistaTemporizador {
     const minutosTexto = String(minutos).padStart(2, "0");
     const segundosTexto = String(segundos).padStart(2, "0");
 
-    this.elementoHTML.innerText = `${minutosTexto}:${segundosTexto}`;
+    this.elementoHTML.innerText = `Tiempo restante: ${minutosTexto}:${segundosTexto}`;
 
   }
 }
