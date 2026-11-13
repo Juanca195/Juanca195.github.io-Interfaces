@@ -133,7 +133,7 @@ export class Juego {
 
     const columna = Math.floor(xTablero / this.vistaTablero.anchoCelda);
     const fila = Math.floor(yTablero / this.vistaTablero.altoCelda);
-
+    
     // Solo se puede empezar a arrastrar desde un pozo ocupado.
     if (this.tablero.matriz[fila][columna] !== 1) {
       return;
@@ -149,8 +149,7 @@ export class Juego {
     this.estaArrastrando = true;
     this.posicionActualMouseX = xTablero;
     this.posicionActualMouseY = yTablero;
-    this.movimientosPosiblesActuales =
-      this.tablero.obtenerMovimientosPosiblesDesde(fila, columna);
+    this.movimientosPosiblesActuales = this.tablero.obtenerMovimientosPosiblesDesde(fila, columna);
 
 
     this.vistaTablero.dibujarTableroCompleto(
@@ -214,82 +213,83 @@ export class Juego {
   }
 
   manejarMouseUp(posXSoltar, posYSoltar) {
-    // Si no había una ficha en arrastre, no hay movimiento que procesar.
-    if (!this.estaArrastrando || !this.pozoEnArrastre) {
-      return;
-    }
+  if (!this.estaArrastrando || !this.pozoEnArrastre) {
+    return;
+  }
 
-    const canvas = this.vistaTablero.canvas;
-    const rect = canvas.getBoundingClientRect();
+  const canvas = this.vistaTablero.canvas;
+  const rect = canvas.getBoundingClientRect();
 
-    // Convertimos el punto de suelta al tamaño interno del canvas.
-    const xCanvas = posXSoltar * (canvas.width / rect.width);
-    const yCanvas = posYSoltar * (canvas.height / rect.height);
+  const xCanvas = posXSoltar * (canvas.width / rect.width);
+  const yCanvas = posYSoltar * (canvas.height / rect.height);
 
-    const anchoTablero =
-      this.tablero.matriz[0].length * this.vistaTablero.anchoCelda;
-    const altoTablero =
-      this.tablero.matriz.length * this.vistaTablero.altoCelda;
+  const anchoTablero =
+    this.tablero.matriz[0].length * this.vistaTablero.anchoCelda;
+  const altoTablero =
+    this.tablero.matriz.length * this.vistaTablero.altoCelda;
 
-    // Quitamos el desplazamiento del centrado para calcular fila y columna.
-    const desplazamientoX = (canvas.width - anchoTablero) / 2;
-    const desplazamientoY = (canvas.height - altoTablero) / 2;
-    const xTablero = xCanvas - desplazamientoX;
-    const yTablero = yCanvas - desplazamientoY;
+  const desplazamientoX = (canvas.width - anchoTablero) / 2;
+  const desplazamientoY = (canvas.height - altoTablero) / 2;
+  const xTablero = xCanvas - desplazamientoX;
+  const yTablero = yCanvas - desplazamientoY;
 
-    // Me permite controlar si se realizo un movimiento valido o no, para verificar si el juego termino
-    let movimientoRealizado = false;
+  let movimientoRealizado = false;
 
-    // Si se soltó fuera de los límites de la grilla, no aplicamos el movimiento.
-    if (
-      xTablero >= 0 &&
-      yTablero >= 0 &&
-      xTablero < anchoTablero &&
-      yTablero < altoTablero
-    ) {
-      const columnaDestino = Math.floor(
-        xTablero / this.vistaTablero.anchoCelda
-      );
-      const filaDestino = Math.floor(
-        yTablero / this.vistaTablero.altoCelda
-      );
-
-      const filaOrigen = this.pozoEnArrastre.fila;
-      const columnaOrigen = this.pozoEnArrastre.columna;
-
-      // Solo movemos la ficha si el modelo valida el salto.
-      if (
-        this.tablero.esMovimientoValido(
-          filaOrigen,
-          columnaOrigen,
-          filaDestino,
-          columnaDestino
-        )
-      ) {
-        this.tablero.moverFicha(filaOrigen, columnaOrigen, filaDestino, columnaDestino);
-        movimientoRealizado = true; // Hubo movimiento valido.
-      }
-
-    }
-
-    // Limpiamos el estado del arrastre, tanto si el movimiento fue válido como si no.
-    this.pozoEnArrastre = null;
-    this.estaArrastrando = false;
-    this.movimientosPosiblesActuales = [];
-
-    // Redibujamos: si el movimiento no fue válido, la ficha vuelve a su lugar.
-    this.vistaTablero.dibujarTableroCompleto(
-      this.tablero,
-      this.fichaElegida,
-      null,
-      null
+  if (
+    xTablero >= 0 &&
+    yTablero >= 0 &&
+    xTablero < anchoTablero &&
+    yTablero < altoTablero
+  ) {
+    const columnaDestino = Math.floor(
+      xTablero / this.vistaTablero.anchoCelda
+    );
+    const filaDestino = Math.floor(
+      yTablero / this.vistaTablero.altoCelda
     );
 
-    if (movimientoRealizado) { // Avisamos si no hay más movimientos posibles, para que el juego termine.
-      this.verificarFinDeJuego();
-    }
+    const filaOrigen = this.pozoEnArrastre.fila;
+    const columnaOrigen = this.pozoEnArrastre.columna;
 
+    const movimientoElegido = this.movimientosPosiblesActuales.find(
+      (movimiento) =>
+        movimiento.filaDestino === filaDestino &&
+        movimiento.columnaDestino === columnaDestino
+    );
+
+    if (
+      movimientoElegido &&
+      movimientoElegido.secuencia &&
+      movimientoElegido.secuencia[0].filaOrigen === filaOrigen &&
+      movimientoElegido.secuencia[0].columnaOrigen === columnaOrigen
+    ) {
+      for (const salto of movimientoElegido.secuencia) {
+        this.tablero.moverFicha(
+          salto.filaOrigen,
+          salto.columnaOrigen,
+          salto.filaDestino,
+          salto.columnaDestino
+        );
+      }
+
+      movimientoRealizado = true;
+    }
   }
+
+  this.pozoEnArrastre = null;
+  this.estaArrastrando = false;
+
+  this.vistaTablero.dibujarTableroCompleto(
+    this.tablero,
+    this.fichaElegida,
+    null,
+    null
+  );
+
+  if (movimientoRealizado) {
+    this.verificarFinDeJuego();
+  }
+}
 
 
   verificarFinDeJuego() {
@@ -303,7 +303,9 @@ export class Juego {
     }
     this.estadoDelJuego = "FINALIZADO";
     this.temporizador.detener();
-    this.vistaTablero.mostrarMensajeFinDeJuego(estado);
+    const fichasRestantes = this.tablero.contarFichasRestantes();
+    this.vistaTablero.mostrarMensajeFinDeJuego(estado, fichasRestantes);
+    
 
   }
 

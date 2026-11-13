@@ -221,12 +221,12 @@ export class VistaTablero {
     }
   }
 
-  mostrarMensajeFinDeJuego(estadoDelJuego) {
+  mostrarMensajeFinDeJuego(estadoDelJuego, fichas) {
     // Muestra el resultado final (ganó / perdió / se acabó el tiempo)
     const mensajes = {
       GANASTE: "¡Ganaste!",
       GANASTE_PERFECTO: "¡Ganaste perfecto!",
-      PERDISTE: "No quedan movimientos posibles",
+      PERDISTE: `No quedan movimientos posibles. Sobraron ${fichas} fichas.`,
       TIMEOUT: "Se acabó el tiempo",
       SELECCION_DE_FICHA: "Seleccioná una ficha para comenzar el juego.",
     };

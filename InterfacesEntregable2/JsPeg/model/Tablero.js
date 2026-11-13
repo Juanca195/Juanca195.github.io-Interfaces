@@ -100,41 +100,149 @@ export class Tablero {
         return true;
     }
 
-    // devuelve una lista de { filaDestino, colDestino } válidos desde un pozo dado.
-    obtenerMovimientosPosiblesDesde(fila, columna) {
-        const posibles = [];
 
-        for (const movimiento of this.movimientos) {
-            //con esto voy verificando el cambio de fila y columna
-            const cambioFila = movimiento[0];
-            const cambioColumna = movimiento[1];
+   obtenerMovimientosPosiblesDesde(fila, columna) {
+    const posibles = [];
 
-            const filaDestino = fila + cambioFila;
-            const columnaDestino = columna + cambioColumna;
+    for (const movimiento of this.movimientos) {
+        const filaPrimera = fila + movimiento[0];
+        const columnaPrimera = columna + movimiento[1];
 
-            // valido si son movimientos posibles y se los agrego a posible
-            // para luego devolverlos
-            const esValido = this.esMovimientoValido(fila, columna, filaDestino, columnaDestino);
-
-            if (esValido) {
-                //guarda el objeto con las coordenadas del destino
-                // por ejemplo si el calculo resultante es fila 3 y columna 5
-                // quedaria 
-                //[
-                //  {filaDestino: 3, columnDestino: 5}
-                //]
-                posibles.push({
-                    filaDestino: filaDestino,
-                    columnaDestino: columnaDestino
-                })
-            }
-
+        if (!this.esMovimientoValido(
+            fila,
+            columna,
+            filaPrimera,
+            columnaPrimera
+        )) {
+            continue;
         }
 
-        return posibles;
+        const saltoPrimero = {
+            filaOrigen: fila,
+            columnaOrigen: columna,
+            filaDestino: filaPrimera,
+            columnaDestino: columnaPrimera
+        };
 
+        // Hint del primer salto.
+        posibles.push({
+            filaDestino: filaPrimera,
+            columnaDestino: columnaPrimera,
+            secuencia: [saltoPrimero]
+        });
+
+        const filaIntermedia = (fila + filaPrimera) / 2;
+        const columnaIntermedia = (columna + columnaPrimera) / 2;
+
+        const estadoOrigen = this.matriz[fila][columna];
+        const estadoIntermedio =
+            this.matriz[filaIntermedia][columnaIntermedia];
+        const estadoDestino =
+            this.matriz[filaPrimera][columnaPrimera];
+
+        try {
+            // Simula el primer salto para encontrar el segundo.
+            this.moverFicha(
+                fila,
+                columna,
+                filaPrimera,
+                columnaPrimera
+            );
+
+            for (const siguiente of this.movimientos) {
+                const filaSiguiente = filaPrimera + siguiente[0];
+                const columnaSiguiente = columnaPrimera + siguiente[1];
+
+                if (!this.esMovimientoValido(
+                    filaPrimera,
+                    columnaPrimera,
+                    filaSiguiente,
+                    columnaSiguiente
+                )) {
+                    continue;
+                }
+
+                // Hint del segundo salto: conserva los dos pasos de la ruta.
+                posibles.push({
+                    filaDestino: filaSiguiente,
+                    columnaDestino: columnaSiguiente,
+                    secuencia: [
+                        saltoPrimero,
+                        {
+                            filaOrigen: filaPrimera,
+                            columnaOrigen: columnaPrimera,
+                            filaDestino: filaSiguiente,
+                            columnaDestino: columnaSiguiente
+                        }
+                    ]
+                });
+            }
+        } finally {
+            // Restaura el tablero real después de simular.
+            this.matriz[fila][columna] = estadoOrigen;
+            this.matriz[filaIntermedia][columnaIntermedia] =
+                estadoIntermedio;
+            this.matriz[filaPrimera][columnaPrimera] = estadoDestino;
+        }
     }
 
+    return posibles;
+}
+//Funcionamiento normal; 
+    // devuelve una lista de { filaDestino, colDestino } válidos desde un pozo dado.
+    // obtenerMovimientosPosiblesDesde(fila, columna) {
+    //     const posibles = [];
+
+    //     for (const movimiento of this.movimientos) {
+    //         //con esto voy verificando el cambio de fila y columna
+    //         const cambioFila = movimiento[0];
+    //         const cambioColumna = movimiento[1];
+
+    //         const filaDestino = fila + cambioFila;
+    //         const columnaDestino = columna + cambioColumna;
+
+
+    //         //for aca para que busque o siga buscando?
+
+    //         // valido si son movimientos posibles y se los agrego a posible
+    //         // para luego devolverlos
+    //         const esValido = this.esMovimientoValido(fila, columna, filaDestino, columnaDestino);
+
+    //         if (esValido) {
+    //             //guarda el objeto con las coordenadas del destino
+    //             // por ejemplo si el calculo resultante es fila 3 y columna 5
+    //             // quedaria 
+    //             //[
+    //             //  {filaDestino: 3, columnDestino: 5}
+    //             //]
+    //             posibles.push({
+    //                 filaDestino: filaDestino,
+    //                 columnaDestino: columnaDestino
+    //             })
+    //         }
+    //         // if(esValido){
+    //         //     this.obtenerMovimientosPosiblesDesde(this.filaDestino, this.columnaDestino)
+    //         // }
+    //     }
+    //     return posibles;
+
+    // }
+
+    contarFichasRestantes() {
+        // Cuenta los pozos en estado "ocupado"
+        let cont = 0;
+        //
+        for (const fila of this.matriz) {
+            //va contado por fila los pozos
+            for (const pozo of fila) {
+                //verificamos que este ocupada
+                if (pozo == 1) {
+                    cont++;
+                }
+            }
+        }
+        return cont;
+    }
     moverFicha(filaOrigen, colOrigen, filaDestino, colDestino) {
         // calculo la fila y columna, sus respectivas diferencias
         const difFila = filaDestino - filaOrigen;
