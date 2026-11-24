@@ -184,12 +184,14 @@
   .roca {
     position: absolute;
     z-index: 3;
+    left: 0; 
     overflow: hidden;
     background-image: url("../Img/images_gokubird/roca_obstaculo_transparente.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
     pointer-events: none;
+    will-change: transform; 
   }
 
   /* La roca superior se invierte verticalmente para que apunte hacia el hueco. */
