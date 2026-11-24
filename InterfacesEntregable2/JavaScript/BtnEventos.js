@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const menuPerfil = document.querySelector('.menu-perfil');
 
   // Evento para abrir/cerrar el menú al hacer clic en el botón
-  btnPerfil.addEventListener('click', function(evento) {
+  btnPerfil?.addEventListener('click', function(evento) {
     // toggle() agrega la clase 'activo' si no la tiene, y la quita si ya la tiene
     menuPerfil.classList.toggle('activo');
     
@@ -135,14 +135,16 @@ function crearTarjeta(juego) {
 }
 
 // Click en el botón: genera la lista si no existe, o la borra si ya está
-botonPremium.addEventListener("click", (evento) => {
+if (botonPremium && listaJuegos) {
+  botonPremium.addEventListener("click", (evento) => {
     evento.preventDefault(); // evita que el href="" recargue la página
     if (listaJuegos.children.length > 0) {
         listaJuegos.replaceChildren();
     } else {
         listaJuegos.append(...juegos.map(crearTarjeta));
     }
-});
+  });
+}
 
 //flechas
 
@@ -159,10 +161,13 @@ function goTo(i) {
 
 }
 
-next.addEventListener('click', () => goTo(index + 1));
-prev.addEventListener('click', () => goTo(index - 1));
+// Estos controles solo existen en la página de inicio.
+if (container && next && prev) {
+  next.addEventListener('click', () => goTo(index + 1));
+  prev.addEventListener('click', () => goTo(index - 1));
 
-goTo(0);
+  goTo(0);
+}
 
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -171,6 +176,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     const loadingText = document.querySelector('.loading-text');
     const progress = document.querySelector('.progress');
     const progressNumber = document.querySelector('.persent');
+
+    // La pantalla de carga solo existe en la página de inicio.
+    if (!overlay || !loadingText || !progress || !progressNumber) return;
 
     overlay.hidden = false;
 

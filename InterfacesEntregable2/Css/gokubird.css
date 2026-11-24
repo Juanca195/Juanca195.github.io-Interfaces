@@ -1,369 +1,497 @@
   /* Define los colores y la tipografía general de la página. */
-:root {
-  color-scheme: light;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #010507;
-  color: #17324d;
-}
+  :root {
+    --secondary-dark-2: #26004D;
+    --secondary-dark-1: #4D0099;
+    --secondary: #9f4cdb;
+    --secondary-light-1: #B366FF;
+    --secondary-light-2: #E6CCFF;
+    --primary-dark-2: #002040;
+    --primary-dark-1: #004080;
+    --primary: #0000FF;
+    --primary-light-1: #4DA6FF;
+    --primary-light-2: #CCE6FF;
+    --accent: #FFD700;
+    --muted: #c1c1c1;
+    --background-page: #111114;
+    --white: #FFFFFF;
+    --black: #000000;
+    --font-primary: 'Exo 2', 'sans serif';
+    --font-secondary: 'Roboto', 'sans serif';
+  }
 
-/* Centra el juego y deja espacio alrededor en pantallas pequeñas. */
-body {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  place-items: center;
-  box-sizing: border-box;
-}
+  /* Centra el juego y deja espacio alrededor en pantallas pequeñas. */
+  body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    place-items: center;
+    box-sizing: border-box;
+  }
 
-/* Mantiene el título, el marcador y el escenario en una misma columna. */
-.contenedor-juego {
-  text-align: center;
-  position: relative;
-  left: -135px;
-}
-.zona-juego {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 20px;
-}
+  /* Mantiene el escenario y la columna de información en una misma fila. */
+  .contenedor-juego {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    text-align: center;
+    gap:12px;
+  }
 
-/* Da estilo al título sin depender de imágenes o librerías externas. */
-h1 {
-  margin: 0 0 12px;
-  color: #e65c16;
-  font-size: clamp(1.8rem, 8vw, 2.5rem);
-  text-shadow: 1px 2px 0 #ffd76a;
-}
-/* Hace que el puntaje sea fácil de encontrar antes y durante la partida. */
-.marcador {
-  min-height: 1.5em;
-  margin: 0 0 10px;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
+  .zona-juego {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 16px;
+  }
 
-.ayuda-lateral {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(100% + 20px);
-  width: 300px;
-  height: auto;
-  box-sizing: border-box;
-  padding: 16px;
-  border: 3px solid #e6e5e2;
-  border-radius: 16px;
-  background: #2a2370;
-  color: #e7f2fc;
-  line-height: 1.5;
-  text-align: left;
-}
-/* El marco mantiene la proporción 900:600 y recorta el escenario escalado. */
-.marco-canvas {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 900 / 600;
-  overflow: hidden;
-  border: 4px solid #17324d;
-  border-radius: 12px;
-  background: #87ceeb;
-  box-shadow: 0 8px 20px #17324d33;
-}
+  .contenedor-juego .breadcrumb {
+    align-self: flex-start;
+  }
 
-/* Escenario con tamaño lógico fijo (lo define main.js).
+  .contenedor-juego #texto-mensaje {
+    color: #000000;
+  }
+
+  
+
+  /* El título, el puntaje y las instrucciones forman una sola columna. */
+  .columna-ayuda {
+    flex: 0 0 320px;
+    width: 320px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 12px;
+  }
+
+  /* Da estilo al título sin depender de imágenes o librerías externas. */
+  h1 {
+    margin: 0 0 6px;
+    padding: 0;
+    color: #e65c16;
+    text-shadow: 1px 2px 0 #ffd76a;
+    font-size: 30px;
+  }
+
+
+  .hud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #e6e5e2;
+    border-radius: 12px;
+    background: #2a2370;
+    padding: 14px;
+    gap: 10px;
+  }
+  /* Hace que el puntaje sea fácil de encontrar antes y durante la partida. */
+  .marcador {
+    min-height: 1.5em;
+    margin: 0 0 10px;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .ayuda-lateral {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    border: 2px solid #e6e5e2;
+    border-radius: 12px;
+    background: #2a2370;
+    color: #e7f2fc;
+    font-size: 20px;
+    line-height: 1.45;
+    text-align: left;
+  }
+
+  .ayuda-lateral h2 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+  }
+
+  .ayuda-lateral li + li {
+    margin-top: 3px;
+  }
+
+  /* En pantallas angostas el panel de ayuda pasa abajo del escenario. */
+  @media (max-width: 900px) {
+    .zona-juego {
+      flex-direction: column;
+      align-items: center;
+      max-width: 560px;
+    }
+
+    .columna-ayuda {
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: 520px;
+    }
+
+  }
+
+  /* El marco mantiene la proporción 900:600 y ocupa todo el ancho disponible. */
+  .marco-canvas {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 900 / 600;
+    overflow: hidden;
+    border: 4px solid #17324d;
+    border-radius: 12px;
+    background: #87ceeb;
+    box-shadow: 0 8px 20px #17324d33;
+  }
+
+  /* Escenario con tamaño lógico fijo (lo define main.js).
    JavaScript lo escala con transform para adaptarlo al ancho del marco.
    z-index: 0 crea un contexto de apilamiento propio, así la pantalla de
    mensajes (z-index: 2) siempre queda por encima de todo lo del escenario. */
-.escenario {
-  position: relative;
-  z-index: 0;
-  overflow: hidden;
-  background: #87ceeb;
-  transform-origin: top left;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
-}
+  .escenario {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    background: #87ceeb;
+    transform-origin: top left;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
 
-/* Capas parallax: la imagen se repite en horizontal y JavaScript mueve su posición.
+  /* Capas parallax: la imagen se repite en horizontal y JavaScript mueve su posición.
    El z-index de cada una lo asigna la vista (0, 1, 2). */
-.capa {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  background-position: 0 0;
-  pointer-events: none;
-}
+  .capa {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: 0 0;
+    pointer-events: none;
+  }
 
-/* Cada mitad de un obstáculo se recorta al rectángulo que le corresponde. */
-.roca {
-  position: absolute;
-  z-index: 3;
-  overflow: hidden;
-  background-image: url("../Img/images_gokubird/roca_obstaculo_transparente.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
-  pointer-events: none;
-}
+  /* Cada mitad de un obstáculo se recorta al rectángulo que le corresponde. */
+  .roca {
+    position: absolute;
+    z-index: 3;
+    overflow: hidden;
+    background-image: url("../Img/images_gokubird/roca_obstaculo_transparente.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    pointer-events: none;
+  }
 
-/* La roca superior se invierte verticalmente para que apunte hacia el hueco. */
-.roca--arriba {
-  transform: scaleY(-1);
-}
+  /* La roca superior se invierte verticalmente para que apunte hacia el hueco. */
+  .roca--arriba {
+    transform: scaleY(-1);
+  }
 
-/* Cada esfera toma una de las siete imágenes de la fila y flota con CSS. */
-.esfera {
-  position: absolute;
-  z-index: 3;
+  /* Cada esfera toma una de las siete imágenes de la fila y flota con CSS. */
+  .esfera {
+    position: absolute;
+    z-index: 3;
 
-  width: 42px;
-  height: 102px;
+    width: 42px;
+    height: 102px;
 
-  background-image: url("../Img/images_gokubird/esferas_dragon.png");
-  background-repeat: no-repeat;
-  background-size: 700% 100%;
-  background-position-y: 50%;
+    background-image: url("../Img/images_gokubird/esferas_dragon.png");
+    background-repeat: no-repeat;
+    background-size: 700% 100%;
+    background-position-y: 50%;
 
-  pointer-events: none;
-   animation: animaesfera-aparecer 0.4s ease-out,
-    esfera-flotar 1.4s ease-in-out infinite alternate,
-    esfera-brillo 1.4s ease-in-out infinite alternate;
-  
-}
+    pointer-events: none;
+    animation: esfera-aparecer 0.4s ease-out,
+      esfera-flotar 1.4s ease-in-out infinite alternate,
+      esfera-brillo 1.4s ease-in-out infinite alternate;
 
-/* Entra con un pequeño rebote. */
-@keyframes esfera-aparecer {
-  from { scale: 0; opacity: 0; }
-  60%  { scale: 1.25; opacity: 1; }
-  to   { scale: 1; opacity: 1; }
-}
+  }
 
-/* Flota y se balancea un poco. */
-@keyframes esfera-flotar {
-  from { translate: 0 -6px; rotate: -4deg; }
-  to   { translate: 0 6px;  rotate: 4deg; }
-}
+  /* Entra con un pequeño rebote. */
+  @keyframes esfera-aparecer {
+    from {
+      scale: 0;
+      opacity: 0;
+    }
 
-/* Resplandor dorado que late. */
-@keyframes esfera-brillo {
-  from { filter: drop-shadow(0 0 4px #ffb300) brightness(1); }
-  to   { filter: drop-shadow(0 0 14px #ffd76a) brightness(1.25); }
-}
+    60% {
+      scale: 1.25;
+      opacity: 1;
+    }
 
-/* El suelo va por encima de las rocas y por debajo de Goku.
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  /* Flota y se balancea un poco. */
+  @keyframes esfera-flotar {
+    from {
+      translate: 0 -6px;
+      rotate: -4deg;
+    }
+
+    to {
+      translate: 0 6px;
+      rotate: 4deg;
+    }
+  }
+
+  /* Resplandor dorado que late. */
+  @keyframes esfera-brillo {
+    from {
+      filter: drop-shadow(0 0 4px #ffb300) brightness(1);
+    }
+
+    to {
+      filter: drop-shadow(0 0 14px #ffd76a) brightness(1.25);
+    }
+  }
+
+  /* El suelo va por encima de las rocas y por debajo de Goku.
    El color de respaldo se ve mientras la imagen no está lista. */
-.suelo {
-  position: absolute;
-  z-index: 4;
-  left: 0;
-  width: 100%;
-  background-color: #633b2e;
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  background-position: 0 0;
-  pointer-events: none;
-}
+  .suelo {
+    position: absolute;
+    z-index: 4;
+    left: 0;
+    width: 100%;
+    background-color: #633b2e;
+    background-repeat: repeat-x;
+    background-size: auto 100%;
+    background-position: 0 0;
+    pointer-events: none;
+  }
 
-/* Superpone a Goku al fondo y permite ubicarlo desde el controlador.
+  /* Superpone a Goku al fondo y permite ubicarlo desde el controlador.
    Vive dentro del escenario, así que se escala junto con él.
    "aspect-ratio" define la proporción del cuadro de VUELO (153 x 151),
    que es el estado por defecto; "impulso" y "choque" la pisan más abajo
    porque sus hojas de sprites tienen cuadros de otra proporción. */
-.jugador {
-  position: absolute;
-  z-index: 5;
-  width: 58px;
-  aspect-ratio: 153 / 151;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-}
+  .jugador {
+    position: absolute;
+    z-index: 5;
+    width: 58px;
+    aspect-ratio: 153 / 151;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+  }
 
-/* Mientras dura el impulso (salto) el cuadro es más alto por la estela de fuego. */
-.jugador.impulso {
-  aspect-ratio: 150 / 218;
-}
+  /* Mientras dura el impulso (salto) el cuadro es más alto por la estela de fuego. */
+  .jugador.impulso {
+    aspect-ratio: 150 / 218;
+  }
 
-/* Durante la explosión final el cuadro es más ancho por la nube creciendo. */
-.jugador.choque {
-  aspect-ratio: 204 / 184;
-}
+  /* Durante la explosión final el cuadro es más ancho por la nube creciendo. */
+  .jugador.choque {
+    aspect-ratio: 204 / 184;
+  }
 
-/* Una sola capa muestra siempre la hoja de sprites activa.
+  /* Una sola capa muestra siempre la hoja de sprites activa.
    Ya no hace falta una segunda capa para fundir poses: cada estado
    tiene su propia animación de "background-position" con pasos fijos. */
-.jugador__sprite {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: 0% 50%;
-}
+  .jugador__sprite {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: 0% 50%;
+  }
 
-/* Vuelo normal: 5 cuadros en bucle mientras Goku no salta. */
-.jugador.volando .jugador__sprite {
-  background-image: url("../Img/images_gokubird/goku_vuelo.png");
-  background-size: 500% 100%;
-  animation: vuelo-aleteo 0.8s steps(4) infinite;
-}
+  /* Vuelo normal: 5 cuadros en bucle mientras Goku no salta. */
+  .jugador.volando .jugador__sprite {
+    background-image: url("../Img/images_gokubird/goku_vuelo.png");
+    background-size: 500% 100%;
+    animation: vuelo-aleteo 0.8s steps(4) infinite;
+  }
 
-/* Impulso: 5 cuadros con la estela de fuego creciendo, una sola vez por salto.
+  /* Impulso: 5 cuadros con la estela de fuego creciendo, una sola vez por salto.
    Esta regla va después de la de "volando" para que gane cuando las dos
    clases están puestas a la vez (mientras dura el salto). */
-.jugador.impulso .jugador__sprite {
-  background-image: url("../Img/images_gokubird/goku_impulso.png");
-  background-size: 500% 100%;
-  animation: impulso-despegue 0.3s steps(4) 1;
-}
+  .jugador.impulso .jugador__sprite {
+    background-image: url("../Img/images_gokubird/goku_impulso.png");
+    background-size: 500% 100%;
+    animation: impulso-despegue 0.3s steps(4) 1;
+  }
 
-/* Choque: 4 cuadros de la nube deshaciéndose en humo, una sola vez,
+  /* Choque: 4 cuadros de la nube deshaciéndose en humo, una sola vez,
    y se queda en el último cuadro ("forwards") hasta la pantalla de fin. */
-.jugador.choque .jugador__sprite {
-  background-image: url("../Img/images_gokubird/goku_choque.png");
-  background-size: 400% 100%;
-  animation: choque-explosion 0.6s steps(3) 1 forwards;
-}
-/* Muestra al dragón encima del fondo y recorre el spritesheet horizontal. */
-.dragon {
-  position: absolute;
-  z-index: 4;
-  background-image: url("../Img/images_gokubird/dragonAnimacion.png");
-  background-repeat: no-repeat;
-  background-size: 600% 100%;
-  background-position: 0 50%;
-  pointer-events: none;
-  transform-origin: center;
-  animation:
-    dragon-volando 1.5s steps(1, end) infinite,
-    dragon-vaiven 1.5s ease-in-out infinite alternate;
-}
+  .jugador.choque .jugador__sprite {
+    background-image: url("../Img/images_gokubird/goku_choque.png");
+    background-size: 400% 100%;
+    animation: choque-explosion 0.6s steps(3) 1 forwards;
+  }
 
-/* 10 pasos: 1-2-3-4-5-6-5-4-3-2. Cada keyframe se mantiene hasta el siguiente. */
-@keyframes dragon-volando {
-  0%   { background-position-x: 0%; }
-  10%  { background-position-x: 20%; }
-  20%  { background-position-x: 40%; }
-  30%  { background-position-x: 60%; }
-  40%  { background-position-x: 80%; }
-  50%  { background-position-x: 100%; }
-  60%  { background-position-x: 80%; }
-  70%  { background-position-x: 60%; }
-  80%  { background-position-x: 40%; }
-  90%  { background-position-x: 20%; }
-}
+  /* Muestra al dragón encima del fondo y recorre el spritesheet horizontal. */
+  .dragon {
+    position: absolute;
+    z-index: 4;
+    background-image: url("../Img/images_gokubird/dragonAnimacion.png");
+    background-repeat: no-repeat;
+    background-size: 600% 100%;
+    background-position: 0 50%;
+    pointer-events: none;
+    transform-origin: center;
+    animation:
+      dragon-volando 1.5s steps(1, end) infinite,
+      dragon-vaiven 1.5s ease-in-out infinite alternate;
+  }
 
-@keyframes dragon-vaiven {
-  from { transform: translateY(-4px); }
-  to   { transform: translateY(4px); }
-}
+  /* 10 pasos: 1-2-3-4-5-6-5-4-3-2. Cada keyframe se mantiene hasta el siguiente. */
+  @keyframes dragon-volando {
+    0% {
+      background-position-x: 0%;
+    }
 
-/* Cada @keyframes recorre su hoja de izquierda a derecha.
+    10% {
+      background-position-x: 20%;
+    }
+
+    20% {
+      background-position-x: 40%;
+    }
+
+    30% {
+      background-position-x: 60%;
+    }
+
+    40% {
+      background-position-x: 80%;
+    }
+
+    50% {
+      background-position-x: 100%;
+    }
+
+    60% {
+      background-position-x: 80%;
+    }
+
+    70% {
+      background-position-x: 60%;
+    }
+
+    80% {
+      background-position-x: 40%;
+    }
+
+    90% {
+      background-position-x: 20%;
+    }
+  }
+
+  @keyframes dragon-vaiven {
+    from {
+      transform: translateY(-4px);
+    }
+
+    to {
+      transform: translateY(4px);
+    }
+  }
+
+  /* Cada @keyframes recorre su hoja de izquierda a derecha.
    "steps(cantidadDeCuadros - 1)" hace que salte de cuadro en cuadro
    en vez de deslizar la imagen de forma continua. */
-@keyframes vuelo-aleteo {
-  from {
-    background-position-x: 0%;
+  @keyframes vuelo-aleteo {
+    from {
+      background-position-x: 0%;
+    }
+
+    to {
+      background-position-x: 100%;
+    }
   }
 
-  to {
-    background-position-x: 100%;
-  }
-}
+  @keyframes impulso-despegue {
+    from {
+      background-position-x: 0%;
+    }
 
-@keyframes impulso-despegue {
-  from {
-    background-position-x: 0%;
-  }
-
-  to {
-    background-position-x: 100%;
-  }
-}
-
-@keyframes choque-explosion {
-  from {
-    background-position-x: 0%;
+    to {
+      background-position-x: 100%;
+    }
   }
 
-  to {
-    background-position-x: 100%;
+  @keyframes choque-explosion {
+    from {
+      background-position-x: 0%;
+    }
+
+    to {
+      background-position-x: 100%;
+    }
   }
-}
 
-/* Coloca los mensajes y botones encima del escenario. */
-.pantalla {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  box-sizing: border-box;
-  background: #102a43a8;
-}
+  /* Coloca los mensajes y botones encima del escenario. */
+  .pantalla {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+    background: #102a43a8;
+  }
 
-/* Oculta la pantalla cuando el juego está en marcha. */
-.pantalla[hidden] {
-  display: none;
-}
+  /* Oculta la pantalla cuando el juego está en marcha. */
+  .pantalla[hidden] {
+    display: none;
+  }
 
-/* Da legibilidad al cuadro de inicio y al mensaje de fin de partida. */
-.tarjeta {
-  max-width: 330px;
-  padding: 22px;
-  border: 3px solid #ffd76a;
-  border-radius: 16px;
-  background: #fff9e8;
-  box-shadow: 0 6px 16px #0004;
-}
+  /* Da legibilidad al cuadro de inicio y al mensaje de fin de partida. */
+  .tarjeta {
+    max-width: min(330px, 90%);
+    padding: 16px;
+    border: 3px solid #ffd76a;
+    border-radius: 16px;
+    background: #fff9e8;
+    box-shadow: 0 6px 16px #0004;
+  }
 
-/* Separa visualmente el título del texto de ayuda. */
-.tarjeta h2 {
-  margin: 0 0 10px;
-  color: #d84a12;
-}
+  /* Separa visualmente el título del texto de ayuda. */
+  .tarjeta h2 {
+    margin: 0 0 10px;
+    color: #d84a12;
+  }
 
-/* Ajusta el espacio del texto dentro de la tarjeta. */
-.tarjeta p {
-  margin: 0 0 16px;
-  line-height: 1.45;
-}
+  /* Ajusta el espacio del texto dentro de la tarjeta. */
+  .tarjeta p {
+    margin: 0 0 16px;
+    line-height: 1.45;
+  }
 
-/* Hace que los controles se vean como botones y sean fáciles de pulsar. */
-.tarjeta button {
-  min-height: 44px;
-  padding: 10px 20px;
-  border: 0;
-  border-radius: 8px;
-  background: #e65c16;
-  color: #fff;
-  font: inherit;
-  font-weight: bold;
-  cursor: pointer;
-}
+  /* Hace que los controles se vean como botones y sean fáciles de pulsar. */
+  .tarjeta button {
+    min-height: 44px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 8px;
+    background: #e65c16;
+    color: #fff;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+  }
 
-/* Señala visualmente que el botón está siendo enfocado con teclado. */
-.tarjeta button:focus-visible {
-  outline: 3px solid #17324d;
-  outline-offset: 3px;
-}
+  /* Señala visualmente que el botón está siendo enfocado con teclado. */
+  .tarjeta button:focus-visible {
+    outline: 3px solid #17324d;
+    outline-offset: 3px;
+  }
 
-/* Explica los controles sin distraer del área de juego. */
-.ayuda {
-  margin: 12px 0 0;
-  color: #31536e;
-  line-height: 1.5;
-}
-  
- /* ===== Sección: Descripción + Multimedia ===== */
+ 
+  /* ===== Sección: Descripción + Multimedia ===== */
   .about {
     display: flex;
     gap: 20px;
@@ -379,7 +507,6 @@ h1 {
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
   }
 
   .about__header {
@@ -390,7 +517,7 @@ h1 {
     gap: 10px;
   }
 
-  
+
 
   .about__rating {
     display: flex;
@@ -411,15 +538,17 @@ h1 {
   }
 
   .about__text {
+    margin-top: 10px;
     font-size: 18px;
     font-family: var(--font-primary);
     line-height: 1.7;
+  
   }
 
   .about__community-link {
     display: flex;
     align-items: center;
-    gap: 8px;
+    margin-top: 10px;
     font-size: 20px;
     font-weight: 400;
     font-family: var(--font-primary);
@@ -451,7 +580,7 @@ h1 {
     border-top: 1px solid var(--white);
   }
 
-   /* ===== Encabezados de sección ===== */
+  /* ===== Encabezados de sección ===== */
   .section-heading-row {
     display: flex;
     justify-content: space-between;
@@ -638,16 +767,7 @@ h1 {
     font-weight: 700;
   }
 
-/* Envuelve el marco del juego: sirve de referencia para ubicar la ayuda. */
-/* .zona-juego {
-  position: relative;
-} */
-
-/* Si no hay lugar a la derecha del juego, la ayuda pasa debajo. */
-/* @media (max-width: 1360px) {
-  .ayuda-lateral {
-    position: static;
-    width: auto;
-    margin-top: 16px;
+  .about {
+    display: flex;
+    padding: 50px;
   }
-} */

@@ -3,8 +3,7 @@ import { Obstaculo } from "./Obstaculo.js";
 import { EsferaDragon } from "./EsferaDragon.js";
 import { Dragon } from "./Dragon.js";
 
-//vidas para el choque
-const VIDAS_INICIALES = 3;
+
 /**
  * Contiene el estado y las reglas de la partida.
  * No accede al DOM ni dibuja: solo actualiza los datos del juego.
@@ -28,7 +27,6 @@ export class Juego {
     this.dragones = [];
     this.tiempoHastaDragon = 5;
     this.tiempoParpadeo = 0; 
-    this.vidas = VIDAS_INICIALES;
   }
 
   // Prepara un estado nuevo y deja la partida lista para jugar.
@@ -44,7 +42,6 @@ export class Juego {
     this.ultimoPuntajeConEsferas = 0;
     this.dragones = [];
     this.tiempoHastaDragon = 5;
-    this.vidas = VIDAS_INICIALES;
     this.tiempoParpadeo = 0; 
   }
   crearEsfera(obstaculo) {
@@ -211,7 +208,7 @@ export class Juego {
         // El choque resta un punto, pero no termina la partida.
         this.puntaje = Math.max(0, this.puntaje - 1);
         this.tiempoParpadeo = 1.2;
-        this.perderVida();
+        
         return false;
       }
 
@@ -219,13 +216,6 @@ export class Juego {
       return dragon.x + dragon.ancho > 0;
     });
   }
-  perderVida() {
-    this.vidas = Math.max(0, this.vidas - 1);
-
-    if (this.vidas === 0) {
-      this.estado = "terminado";
-    }
-  } 
 
   // Comprueba si los rectángulos del jugador y el dragón se superponen.
   jugadorTocaDragon(dragon) {
@@ -281,8 +271,6 @@ export class Juego {
     return {
       estado: this.estado,
       puntaje: this.puntaje,
-      vidas: this.vidas,
-      vidasMaximas: VIDAS_INICIALES,
       ancho: this.ancho,
       alto: this.alto,
       sueloY: this.sueloY,

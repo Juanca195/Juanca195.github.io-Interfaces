@@ -30,8 +30,7 @@ const interfaz = new Interfaz(
   obtenerElemento("#pantalla-mensaje"),
   obtenerElemento("#titulo-mensaje"),
   obtenerElemento("#texto-mensaje"),
-  obtenerElemento("#boton-inicio"),
-  obtenerElemento("#vidas")
+  obtenerElemento("#boton-inicio")
 );
 const controlador = new Controlador(
   juego,
